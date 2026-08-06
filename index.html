@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PawWeather — Support</title>
+<meta name="description" content="Support for PawWeather, the dog walk safety app. Is the pavement too hot for your dog's paws?">
+<style>
+  :root{
+    --concrete:#EDEBE6; --card:#FFFFFF; --ink:#23262B; --ink-soft:#5E6167;
+    --caution:#FFC414; --go:#0B7A4B; --danger:#C8202F; --action:#1266A5; --line:#DCD8CF;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--concrete);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.6;padding:24px 20px 64px}
+  .wrap{max-width:680px;margin:0 auto}
+  .sign{background:var(--caution);border-radius:20px;padding:10px;margin:24px 0 28px;
+    box-shadow:0 6px 14px rgba(58,52,40,.12)}
+  .sign-inner{border:2.5px solid rgba(35,38,43,.85);border-radius:12px;padding:22px 20px}
+  .sign h1{font-size:34px;line-height:1.1;letter-spacing:.5px;text-transform:uppercase;
+    font-weight:800;font-stretch:condensed}
+  .sign p{margin-top:6px;font-size:15px}
+  h2{font-size:14px;letter-spacing:2px;text-transform:uppercase;color:var(--ink-soft);
+    margin:34px 0 10px;font-weight:700}
+  .card{background:var(--card);border-radius:16px;padding:20px;
+    box-shadow:0 6px 14px rgba(58,52,40,.08)}
+  .card + .card{margin-top:12px}
+  .card h3{font-size:16px;margin-bottom:6px}
+  .card p, .card li{font-size:15px;color:var(--ink)}
+  .card ul{padding-left:20px;margin-top:6px}
+  a{color:var(--action);font-weight:600;text-decoration:none}
+  a:hover{text-decoration:underline}
+  .muted{color:var(--ink-soft);font-size:13px}
+  footer{margin-top:40px;text-align:center;color:var(--ink-soft);font-size:13px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="sign"><div class="sign-inner">
+    <h1>PawWeather</h1>
+    <p>Is it too hot to walk your dog right now? One look. Three colors.</p>
+  </div></div>
+
+  <h2 id="support">Support</h2>
+  <div class="card">
+    <h3>Contact</h3>
+    <p>Questions, bug reports, and ideas: <a href="mailto:nobutaka.kawasaki@gmail.com">nobutaka.kawasaki@gmail.com</a></p>
+    <p class="muted">Solo developer — I read everything, and replies usually take a day or two.</p>
+  </div>
+  <div class="card">
+    <h3>How verdicts work</h3>
+    <p>PawWeather combines two separate risks, judged for your dog's profile:</p>
+    <ul>
+      <li><strong>Paws</strong> — estimated pavement temperature, from National Weather Service data, sun angle, cloud cover, and surface type (asphalt or concrete).</li>
+      <li><strong>Heat</strong> — the humidity-aware heat index, with stricter thresholds for flat-faced breeds, puppies, seniors, and dark coats in sun.</li>
+    </ul>
+    <p style="margin-top:8px">Pavement temperatures are <strong>estimates</strong>. The hand test always has the final say: press the back of your hand on the pavement for 7 seconds — if it's too hot for you, it's too hot for their paws. PawWeather is an educational planning tool, not veterinary advice.</p>
+  </div>
+  <div class="card">
+    <h3>Common questions</h3>
+    <ul>
+      <li><strong>Where does the weather come from?</strong> The National Weather Service (api.weather.gov), a free U.S. public service. Coverage is currently U.S. only.</li>
+      <li><strong>What does Pro include?</strong> The 7-day walk planner, smart alerts, and profiles for up to 6 dogs. One-time purchase — no subscription, no ads.</li>
+      <li><strong>Restore a purchase:</strong> Settings → Restore purchases (Pro is tied to your Apple ID).</li>
+      <li><strong>Night suggestions don't work for my area:</strong> Settings → Walk hours lets you cap the earliest and latest times PawWeather will ever suggest.</li>
+    </ul>
+  </div>
+
+  <h2 id="privacy">Privacy</h2>
+  <div class="card">
+    <p>The short version: <strong>PawWeather collects no data.</strong> Details in the
+    <a href="privacy.html">privacy policy</a>.</p>
+  </div>
+
+  <footer>© 2026 Nobutaka Kawasaki · PawWeather</footer>
+</div>
+</body>
+</html>
