@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>When Is Pavement Too Hot for Dog Paws? Temperature Chart &amp; the 7-Second Test</title>
+<meta name="description" content="Asphalt can reach 125°F on a pleasant 75°F day. A temperature chart by air temperature, the 7-second hand test, and what we measured on road sensors after sunset.">
+<style>
+  :root{
+    --concrete:#EDEBE6; --card:#FFFFFF; --ink:#23262B; --ink-soft:#5E6167;
+    --caution:#FFC414; --go:#0B7A4B; --danger:#C8202F; --action:#1266A5; --line:#DCD8CF;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--concrete);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.6;padding:24px 20px 64px}
+  .wrap{max-width:680px;margin:0 auto}
+  .back{font-size:13.5px;font-weight:600}
+  .sign{background:var(--caution);border-radius:20px;padding:10px;margin:18px 0 28px;
+    box-shadow:0 6px 14px rgba(58,52,40,.12)}
+  .sign-inner{border:2.5px solid rgba(35,38,43,.85);border-radius:12px;padding:22px 20px}
+  .sign h1{font-size:30px;line-height:1.12;letter-spacing:.3px;text-transform:uppercase;
+    font-weight:800;font-stretch:condensed}
+  .sign p{margin-top:8px;font-size:15px}
+  h2{font-size:14px;letter-spacing:2px;text-transform:uppercase;color:var(--ink-soft);
+    margin:34px 0 10px;font-weight:700}
+  .card{background:var(--card);border-radius:16px;padding:20px;
+    box-shadow:0 6px 14px rgba(58,52,40,.08)}
+  .card + .card{margin-top:12px}
+  .card h3{font-size:16px;margin-bottom:6px}
+  .card p, .card li{font-size:15px;color:var(--ink)}
+  .card ul{padding-left:20px;margin-top:6px}
+  .card li{margin-top:4px}
+  .card p + p{margin-top:8px}
+  a{color:var(--action);font-weight:600;text-decoration:none}
+  a:hover{text-decoration:underline}
+  .muted{color:var(--ink-soft);font-size:13px}
+  .scroll{overflow-x:auto;margin-top:10px;-webkit-overflow-scrolling:touch}
+  table{border-collapse:collapse;font-size:14.5px;min-width:100%}
+  th,td{padding:8px 10px;text-align:right;white-space:nowrap;border-bottom:1px solid var(--line)}
+  th:first-child,td:first-child{text-align:left}
+  thead th{font-size:12px;letter-spacing:.6px;text-transform:uppercase;
+    color:var(--ink-soft);font-weight:700}
+  tbody tr:last-child td{border-bottom:none}
+  /* 電話では4列が入りきらない。詰めてから、残りは横スクロール */
+  @media (max-width:560px){
+    th,td{padding:7px 7px;font-size:13.5px}
+    thead th{font-size:11px;letter-spacing:.3px}
+  }
+  .hint{font-size:12.5px;color:var(--ink-soft);margin-top:6px}
+  @media (min-width:700px){ .hint{display:none} }
+  .dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:7px;
+    vertical-align:1px}
+  .dot.go{background:var(--go)} .dot.caution{background:var(--caution)}
+  .dot.danger{background:var(--danger)}
+  footer{margin-top:40px;text-align:center;color:var(--ink-soft);font-size:13px}
+</style>
+<meta property="og:title" content="When is pavement too hot for dog paws?">
+<meta property="og:description" content="Asphalt can reach 125°F on a pleasant 75°F day. A chart by air temperature, the 7-second test, and what road sensors say after sunset.">
+<meta property="og:image" content="https://nosunosukawa.github.io/pawweather-site/og-image.png">
+<meta property="og:url" content="https://nosunosukawa.github.io/pawweather-site/hot-pavement.html">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<div class="wrap">
+
+  <p class="back"><a href="./">&larr; PawWeather</a></p>
+
+  <div class="sign"><div class="sign-inner">
+    <h1>When is pavement too hot for dog paws?</h1>
+    <p>The short answer: far earlier in the day, and far later into the evening,
+       than the air temperature suggests.</p>
+  </div></div>
+
+  <h2>The gap nobody feels</h2>
+  <div class="card">
+    <p>You are wearing shoes. Your dog is not, and the surface they walk on is not the
+       air — it is a black solar collector that has been charging all afternoon.</p>
+    <p>On a <strong>75°F</strong> day that feels genuinely pleasant, clear-sky asphalt runs
+       around <strong>125°F</strong>. That is roughly a 50-degree gap between what the
+       forecast tells you and what their pads touch. Concrete sidewalks run considerably
+       cooler, but "cooler" is not the same as "safe."</p>
+  </div>
+
+  <h2>Pavement by air temperature</h2>
+  <div class="card">
+    <div class="scroll">
+    <table>
+      <thead>
+        <tr><th>Air</th><th>Asphalt, clear</th><th>Concrete, clear</th>
+            <th>Asphalt, half cloud</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>70°F</td><td>116°F</td><td>99°F</td><td>99°F</td></tr>
+        <tr><td>75°F</td><td>125°F</td><td>106°F</td><td>107°F</td></tr>
+        <tr><td>80°F</td><td>134°F</td><td>114°F</td><td>114°F</td></tr>
+        <tr><td>85°F</td><td>143°F</td><td>121°F</td><td>122°F</td></tr>
+        <tr><td>90°F</td><td>152°F</td><td>129°F</td><td>129°F</td></tr>
+        <tr><td>95°F</td><td>161°F</td><td>136°F</td><td>137°F</td></tr>
+        <tr><td>100°F</td><td>168°F</td><td>142°F</td><td>143°F</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="hint">Swipe the table sideways for concrete and cloudy days &rarr;</p>
+    <p class="muted" style="margin-top:12px">Midday peak with the sun high, estimated by the
+       model described at the bottom of this page. Real pavement varies with colour, age,
+       shade and wind — these are planning numbers, not measurements of your street.</p>
+  </div>
+
+  <h2>What the numbers mean for paws</h2>
+  <div class="card">
+    <ul>
+      <li><span class="dot go"></span><strong>Below 110°F</strong> — generally fine for
+          normal walk lengths.</li>
+      <li><span class="dot caution"></span><strong>110–125°F</strong> — uncomfortable, and
+          risky over distance. Keep it short, stick to grass and shade, walk early.</li>
+      <li><span class="dot danger"></span><strong>125°F and above</strong> — skin damage has
+          been reported from about a minute of contact at this temperature. This is
+          potty-break-on-the-grass territory, not walk territory.</li>
+    </ul>
+    <p style="margin-top:10px">Notice where 125°F lands on the chart: a <strong>75°F</strong>
+       sunny afternoon. Most people would not think twice about that forecast.</p>
+  </div>
+
+  <h2>The 7-second test beats every estimate — including ours</h2>
+  <div class="card">
+    <p>Press the back of your hand flat against the pavement and hold it for seven
+       seconds. If you have to lift it early, it is too hot for their pads.</p>
+    <p>Use the back of your hand rather than your palm; palms are calloused and will
+       happily lie to you. Test the surface you are actually about to walk on — a shaded
+       driveway and the sunlit road ten feet away can differ by 30 degrees.</p>
+  </div>
+
+  <h2>Evenings are hotter than they feel</h2>
+  <div class="card">
+    <p>Waiting for sunset is the standard advice, and it is only half right. Pavement has
+       thermal mass: it keeps releasing the day's heat for hours after the sun is gone.</p>
+    <p>We checked this against <strong>16 Arizona DOT roadside sensors</strong> at
+       11:13&nbsp;PM local, just under four hours after sunset. The road was
+       <strong>warmer than the air at every single station</strong> — on average
+       <strong>+6.8°F</strong>, and up to <strong>+10.1°F</strong>.</p>
+    <p>That is the window when people are told to walk their dogs. If you plan the evening
+       walk off the air temperature alone, you are consistently underestimating the ground
+       by five to ten degrees — in the exact hours when you were trying to be careful.</p>
+  </div>
+
+  <h2>If the pads are already burned</h2>
+  <div class="card">
+    <p>Signs to look for: limping or refusing to walk, licking or chewing at the feet,
+       pads that look darker than usual, missing patches of pad, or visible blisters.</p>
+    <ul>
+      <li>Get them off the hot surface — carry them if you can.</li>
+      <li>Cool the feet with cool (not ice) water.</li>
+      <li>Keep the area clean and stop them licking it.</li>
+      <li><strong>Call your vet.</strong> Burned pads can get infected, and blistering or
+          missing pad tissue needs to be seen.</li>
+    </ul>
+    <p class="muted" style="margin-top:10px">This page is general information for planning
+       walks, not veterinary advice.</p>
+  </div>
+
+  <h2>Where these numbers come from</h2>
+  <div class="card">
+    <p>The estimates are produced by the same model that runs inside
+       <a href="./">PawWeather</a>, driven by National Weather Service forecasts
+       (api.weather.gov) plus sun angle, cloud cover and surface type.</p>
+    <p>We validate it against Arizona DOT's roadside sensor network rather than trusting
+       the formula. Two things came out of that. In clear-sky daylight our estimate reads
+       <em>above</em> what the highway sensors report — embedded sensors in a road are
+       cooled by wind and passing traffic, and a residential sidewalk is neither, so we
+       left the model on the cautious side of that gap. And the night check above is what
+       made us add thermal lag: modelling evenings as "pavement equals air" was wrong by
+       an average of 6.8°F, and it was wrong in the direction that matters.</p>
+    <p>PawWeather is free to use, has no ads and no subscription, and does the hour-by-hour
+       version of this page for wherever you actually are.</p>
+  </div>
+
+  <footer>
+    © 2026 Nobutaka Kawasaki · <a href="./">PawWeather</a> ·
+    <a href="privacy.html">Privacy policy</a>
+  </footer>
+
+</div>
+</body>
+</html>
