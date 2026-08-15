@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Is a Cloudy Day Safe for Dog Walks? Pavement Heat Without the Sun</title>
+<meta name="description" content="Clouds cut pavement heating, but they don't erase it: on a 95°F overcast day, asphalt can still cross the 110°F caution line for dog paws. Temperature chart for full sun, partly cloudy, overcast, and concrete vs asphalt.">
+<style>
+  /* Same tokens as hot-pavement.html */
+  :root{
+    --concrete:#EDEBE6; --card:#FFFFFF; --ink:#23262B; --ink-soft:#5E6167;
+    --caution:#FFC414; --go:#0B7A4B; --danger:#C8202F; --action:#1266A5; --line:#DCD8CF;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--concrete);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.7;padding:24px 20px 64px}
+  .wrap{max-width:680px;margin:0 auto}
+  .back{font-size:13.5px;font-weight:600}
+  a{color:var(--action);font-weight:600;text-decoration:none}
+  a:hover{text-decoration:underline}
+  .sign{background:var(--caution);border-radius:20px;padding:10px;margin:18px 0 28px;
+    box-shadow:0 6px 14px rgba(58,52,40,.12)}
+  .sign-inner{border:2.5px solid rgba(35,38,43,.85);border-radius:12px;padding:22px 20px}
+  .sign h1{font-size:28px;line-height:1.15;letter-spacing:.3px;text-transform:uppercase;
+    font-weight:800;font-stretch:condensed}
+  .sign p{margin-top:8px;font-size:15px}
+  h2{font-size:14px;letter-spacing:2px;text-transform:uppercase;color:var(--ink-soft);
+    margin:34px 0 10px;font-weight:700}
+  .card{background:var(--card);border-radius:16px;padding:20px;
+    box-shadow:0 6px 14px rgba(58,52,40,.08)}
+  .card + .card{margin-top:12px}
+  .card h3{font-size:16px;margin-bottom:6px}
+  .card p{font-size:15px}
+  .card p + p{margin-top:8px}
+  .muted{color:var(--ink-soft);font-size:13.5px}
+  .scroll{overflow-x:auto;margin-top:10px;-webkit-overflow-scrolling:touch}
+  table{border-collapse:collapse;font-size:14.5px;min-width:100%;white-space:nowrap}
+  th,td{padding:8px 12px;text-align:right;border-bottom:1px solid var(--line)}
+  thead th{font-size:12px;color:var(--ink-soft);vertical-align:bottom;line-height:1.3}
+  tbody th{text-align:left}
+  tbody tr:last-child th,tbody tr:last-child td{border-bottom:none}
+  td.caution{background:rgba(255,196,20,.28);font-weight:700}
+  td.danger{background:rgba(200,32,47,.16);font-weight:700;color:var(--danger)}
+  .chip{display:inline-block;padding:0 6px;border-radius:4px;font-weight:700;font-size:12.5px}
+  .chip.caution{background:rgba(255,196,20,.45)}
+  .chip.danger{background:rgba(200,32,47,.2);color:var(--danger)}
+  .hint{margin-top:8px;font-size:12.5px;color:var(--ink-soft)}
+  @media (min-width:700px){ .hint{display:none} }
+  @media (max-width:560px){ table{font-size:13px} th,td{padding:6px 8px} }
+  footer{margin-top:44px;text-align:center;color:var(--ink-soft);font-size:13px}
+</style>
+<meta property="og:title" content="Is a Cloudy Day Safe for Dog Walks? Pavement Heat Without the Sun">
+<meta property="og:description" content="Clouds cut pavement heating, but they don't erase it. Chart for full sun, partly cloudy, overcast — and concrete vs asphalt.">
+<meta property="og:url" content="https://nosunosukawa.github.io/pawweather-site/cloudy-day-walks.html">
+<meta property="og:type" content="article">
+</head>
+<body>
+<div class="wrap">
+
+  <a class="back" href="index.html">&larr; PawWeather</a>
+
+  <div class="sign">
+    <div class="sign-inner">
+      <h1>Cloudy is cooler.<br>It is not the same as safe.</h1>
+      <p>Clouds block most of the solar gain that cooks asphalt — but only most of it.
+         On a hot day, overcast pavement can still cross the caution line for paw pads.</p>
+    </div>
+  </div>
+
+  <h2>Pavement by sky condition</h2>
+
+  <!-- data:start（node make-cloudy.mjs が生成。手で直さない） -->
+  <div class="scroll">
+    <table>
+      <thead>
+        <tr><th>Air temp</th><th>Asphalt<br>full sun</th><th>Asphalt<br>partly cloudy</th>
+            <th>Asphalt<br>overcast</th><th>Concrete<br>full sun</th></tr>
+      </thead>
+      <tbody>
+        <tr><th scope="row">75°F</th><td class="danger">125°F</td><td>107°F</td><td>88°F</td><td>106°F</td></tr>
+        <tr><th scope="row">80°F</th><td class="danger">134°F</td><td class="caution">114°F</td><td>94°F</td><td class="caution">114°F</td></tr>
+        <tr><th scope="row">85°F</th><td class="danger">143°F</td><td class="caution">122°F</td><td>100°F</td><td class="caution">121°F</td></tr>
+        <tr><th scope="row">90°F</th><td class="danger">152°F</td><td class="danger">129°F</td><td>106°F</td><td class="danger">129°F</td></tr>
+        <tr><th scope="row">95°F</th><td class="danger">161°F</td><td class="danger">137°F</td><td class="caution">112°F</td><td class="danger">136°F</td></tr>
+        <tr><th scope="row">100°F</th><td class="danger">168°F</td><td class="danger">143°F</td><td class="caution">117°F</td><td class="danger">142°F</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="hint">Swipe the table sideways &rarr;</p>
+  <p class="muted">Midday sun (solar elevation 60°). <span class="chip caution">Yellow</span> = at or
+     above the 110°F caution line for paw pads; <span class="chip danger">red</span> = at or
+     above 125°F, where damage can happen fast. Same thresholds the app uses.</p>
+
+  <p style="margin-top:16px">Read the overcast column at 95°F: <strong>112°F</strong> —
+     the clouds took away most of the solar gain (full sun would be 161°F),
+     but the pavement is still past the 110°F caution line. "No sun" and
+     "safe" are different claims, and the gap between them is exactly what you
+     can't feel through shoes.</p>
+  <!-- data:end -->
+
+  <h2>What clouds actually do</h2>
+  <div class="card">
+    <p>Pavement gets hot because it absorbs direct sunlight faster than it can shed the
+       heat. Cloud cover removes up to about three quarters of that solar gain — a real,
+       big effect, which is why the overcast column looks so much friendlier than full sun.</p>
+    <p>But the remaining quarter still stacks on top of the air temperature. That's why
+       the overcast column keeps climbing with the thermometer: on a genuinely hot day,
+       the sky being gray doesn't get asphalt back under the caution line. And clouds
+       move — a "cloudy day" often includes twenty fully sunny minutes, which is enough
+       to reheat a dark surface.</p>
+  </div>
+
+  <h2>Concrete vs asphalt</h2>
+  <div class="card">
+    <p>Light-colored concrete absorbs noticeably less sun than dark asphalt — in our
+       model it picks up about 60% of asphalt's solar gain, and the chart's last column
+       shows what that buys you. On a marginal day, crossing the street to the concrete
+       sidewalk is a genuinely useful move.</p>
+    <p>It is not a free pass: at high air temperatures even concrete in full sun
+       reaches the caution line. Shade beats surface — fully shaded pavement of any
+       kind sits near air temperature.</p>
+  </div>
+
+  <h2>When in doubt: the 7-second test</h2>
+  <div class="card">
+    <p>Press the back of your hand flat on the pavement for 7 seconds. If you can't hold
+       it, it's too hot for paws — whatever the sky looks like. Charts (including this
+       one) estimate typical surfaces; your street, today, is the thing that matters.
+       More on the test and burn signs in
+       <a href="hot-pavement.html">When is pavement too hot for dog paws?</a></p>
+  </div>
+
+  <h2>Check your actual forecast</h2>
+  <div class="card">
+    <p><a href="index.html">PawWeather</a> (iOS) runs this same model against your local
+       hourly forecast — sun, clouds, and surface — and shows go / caution / danger for
+       each hour of the day, so you can pick the walk window instead of guessing from
+       the sky. One-time purchase, no subscription.</p>
+  </div>
+
+  <h2>Where these numbers come from</h2>
+  <div class="card">
+    <p class="muted">The chart is generated by the same risk engine that runs inside the
+       app (<code>make-cloudy.mjs</code> executes it), so this page and the app cannot
+       drift apart. The pavement model is calibrated against published road-surface
+       measurements; thresholds (110°F caution / 125°F danger) are the ones veterinary
+       sources commonly cite for pad burns. Estimates, not guarantees — the 7-second
+       test on your actual pavement always wins.</p>
+  </div>
+
+  <footer>
+    © 2026 Nobutaka Kawasaki · <a href="index.html">PawWeather</a> ·
+    <a href="privacy.html">Privacy policy</a>
+  </footer>
+
+</div>
+</body>
+</html>
