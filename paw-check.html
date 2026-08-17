@@ -91,7 +91,9 @@
     <h1>Is it too hot to walk my dog?</h1>
     <p>Enter the conditions outside. The verdict comes from the same two-axis engine
        as the PawWeather app — hot pavement <em>and</em> heat stress are different
-       dangers, so both are checked and the worse one wins.</p>
+       dangers, so both are checked and the worse one wins. It runs the app's full
+       24-hour pavement model, so the estimate includes the heat the surface
+       <em>stored earlier in the day</em>, not just the sun hitting it right now.</p>
   </div></div>
 
   <div class="card">
@@ -113,19 +115,15 @@
       <div class="field">
         <label for="sky">Sky</label>
         <select id="sky">
-          <option value="0.1" selected>Sunny</option>
-          <option value="0.5">Partly cloudy</option>
-          <option value="0.9">Overcast</option>
+          <option value="Sunny" selected>Sunny</option>
+          <option value="Partly Cloudy">Partly cloudy</option>
+          <option value="Overcast">Overcast</option>
         </select>
       </div>
       <div class="field">
         <label for="sun">Time of day</label>
-        <select id="sun">
-          <option value="65" selected>Midday (high sun)</option>
-          <option value="35">Mid-morning / late afternoon</option>
-          <option value="15">Early morning / near sunset</option>
-          <option value="-5">After dark</option>
-        </select>
+        <!-- 選択肢は day-model.js の HOURS が唯一の出典。ここに手で書き足さない -->
+        <select id="sun"></select>
       </div>
       <div class="field full">
         <label>Your dog</label>
@@ -144,6 +142,11 @@
     <div id="verdict"></div>
     <div class="readings" id="readings"></div>
     <p class="note" id="extraNote"></p>
+    <p class="muted" style="margin-top:10px">One page cannot know your forecast history,
+       so the times above are placed on a representative clear mid-July day in the middle
+       of the US (about 35°&nbsp;N; sunrise 6:36&nbsp;a.m., sunset 8:42&nbsp;p.m.), with the
+       temperature and sky you entered assumed to have held all day. Real nights cool down,
+       which shrinks the evening gap. The app uses your actual hourly forecast instead.</p>
   </div>
 
   <h2>Before you go</h2>
@@ -152,15 +155,17 @@
     <p>Press the back of your hand on the pavement for 7 seconds. If you can't hold it,
        it's too hot for paws. These temperatures are <strong>estimates</strong> from air
        temperature, sun and sky — your street may differ.</p>
-    <p>After sunset, asphalt stays roughly <strong>7&nbsp;°F warmer than the air for
-       hours</strong> — we checked 16 road sensors in Arizona at 11&nbsp;p.m. and every
-       single one was still warmer than the air.
+    <p>After sunset, asphalt stays warmer than the air for hours — we checked 16 road
+       sensors in Arizona at 11&nbsp;p.m. and every single one was still warmer, by
+       <strong>6.8&nbsp;°F on average</strong>. Those are real roads on a night that
+       cooled off; hold the afternoon temperature steady, as this page does, and the
+       model's evening gap is larger.
        <a href="hot-pavement.html">The full data is here</a>.</p>
   </div>
 
   <h2>PawWeather</h2>
   <div class="card">
-    <p>This page checks one moment. The <a href="./">PawWeather app</a> watches the whole
+    <p>This page checks one moment on a stand-in day. The <a href="./">PawWeather app</a> watches the whole
        day for your location and your dog — with pavement heat memory, hour-by-hour walk
        windows, and no account, no ads, no subscription.</p>
   </div>
@@ -172,6 +177,7 @@
 </div>
 
 <script src="pawrisk.js"></script>
+<script src="day-model.js"></script>
 <script>
 (function(){
   var $ = function(id){ return document.getElementById(id); };
@@ -195,18 +201,25 @@
       return;
     }
     var airF = $("tempUnit").value === "C" ? t * 9 / 5 + 32 : t;
-    var cloud = parseFloat($("sky").value);
-    var elev = parseFloat($("sun").value);
+    var sky = $("sky").value;
+    var hour = parseInt($("sun").value, 10);
     var dog = {
       sizeClass: "medium",
       brachy: $("brachy").checked,
       ageStage: $("age").value,
       coat: $("dark").checked ? "dark" : "medium"
     };
-    var a = PawRisk.assess("asphalt", {
-      airF: airF, rh: Math.min(100, Math.max(0, rh)),
-      cloudFraction: cloud, solarElevationDeg: elev
-    }, dog);
+    /*
+      **単発の assess を呼ばない。** 路面は蓄熱するので、その瞬間の日射だけでは決まらない
+      (mobile/pawweather/src/logic/surface.ts の applyThermalLag)。
+      アプリと同じ assessHours に代表日1日分を通し、選ばれた時刻のコマを読む。
+      ここを単発値に戻すと、日没前後の路面を10〜19°F低く——つまり「歩ける」側に——外す。
+    */
+    var cond = { airF: airF, rh: Math.min(100, Math.max(0, rh)), sky: sky };
+    var hourRow = PawDay.at(cond, hour, "asphalt", dog);
+    var a = hourRow.assessment;
+    /* 熱慣性を外したら何度になるか＝この電卓が以前まで出していた数字 */
+    var noMemory = PawDay.equilibriumAt(cond, hour, "asphalt");
 
     var key = a.verdict === "go" ? "go" : a.verdict + "_" + (a.limitingFactor === "heat" ? "heat" : "paws");
     var v = $("verdict");
@@ -218,11 +231,37 @@
       '<div class="reading"><div class="v">~' + round5(a.concreteF) + '&deg;F</div><div class="l">Concrete est.</div></div>' +
       '<div class="reading"><div class="v">' + Math.round(a.heatIndexF) + '&deg;F</div><div class="l">Heat index</div></div>';
 
+    /*
+      注意書きは「日没後だけ」ではなく、**蓄熱が効いている時間帯すべて**に出す。
+      いちばん外れるのは日没“前”の夕方で、そこで黙るのが以前の壊れ方だった。
+      条件は時刻の決め打ちではなく、熱慣性ありと無しの差そのもので判定する。
+    */
+    var gap = a.asphaltF - noMemory;
     var notes = [];
-    if (elev < 0) notes.push("After dark, this estimate assumes the pavement has cooled — measured roads stay ~7 °F above air temperature for hours after sunset, so treat a borderline GO with care.");
-    if (airF <= 45) notes.push("This checker looks at heat only — it does not check ice or de-icing salt.");
+    if (gap >= 5){
+      notes.push("Stored heat is doing " + Math.round(gap) + " \u00b0F of this: the sun angle alone " +
+                 "would put this pavement near " + round5(noMemory) + " \u00b0F, but asphalt keeps " +
+                 "releasing what it soaked up earlier. That gap is what catches people out on " +
+                 "evening walks \u2014 it starts well before sunset.");
+    } else if (gap <= -5){
+      notes.push("The pavement has not charged up yet \u2014 it is running about " + Math.round(-gap) +
+                 " \u00b0F cooler than the sun angle alone suggests. Mornings really are the safer " +
+                 "half of the day, even at the same sun height.");
+    }
+    if (airF <= 45) notes.push("This checker looks at heat only \u2014 it does not check ice or de-icing salt.");
     $("extraNote").textContent = notes.join(" ");
   }
+
+  // 時刻の選択肢は day-model.js の代表日モデルから作る（ページに時刻を手書きしない）
+  (function fillHours(){
+    var sel = $("sun");
+    PawDay.HOURS.forEach(function(h){
+      var o = document.createElement("option");
+      o.value = h.hour; o.textContent = h.label;
+      if (h.hour === 13) o.selected = true;
+      sel.appendChild(o);
+    });
+  })();
 
   ["temp","tempUnit","rh","sky","sun","age","brachy","dark"].forEach(function(id){
     $(id).addEventListener("input", compute);

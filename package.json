@@ -1,0 +1,14 @@
+{
+  "name": "pawweather-site",
+  "private": true,
+  "version": "1.0.0",
+  "description": "PawWeather のサポート/記事サイト。pawrisk.js はアプリ本体から生成する（build-engine.sh）",
+  "scripts": {
+    "build:engine": "./build-engine.sh",
+    "verify": "node verify-engine.mjs",
+    "build:articles": "node make-cloudy.mjs"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0"
+  }
+}
