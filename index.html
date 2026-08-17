@@ -71,11 +71,14 @@
     border-bottom:3px solid var(--caution);
   }
   .util .wrap{
-    display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px;
-    padding-top:10px;padding-bottom:10px;
+    display:flex;flex-wrap:wrap;align-items:center;gap:0 14px;
+    padding-top:3px;padding-bottom:3px;
   }
-  .util .brand{font-size:15px;letter-spacing:.14em;margin-right:auto}
-  .util a{color:#FFDF6B;font-weight:700;text-decoration:none;font-size:14px}
+  .util .brand{font-size:15px;letter-spacing:.14em;margin-right:auto;padding:10px 0}
+  .util a{
+    color:#FFDF6B;font-weight:700;text-decoration:none;font-size:14px;
+    display:inline-block;padding:10px 2px;min-width:0;overflow-wrap:anywhere;
+  }
   .util a:hover{text-decoration:underline}
 
   /* ---------- hero ---------- */
@@ -122,7 +125,7 @@
     font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;
     color:var(--on-slate-soft);
   }
-  .num.hot .k{color:#FFD9DC}
+  .num.hot .k{color:#FFE4E7}
   .num .v{font-size:clamp(46px,14vw,68px);margin:2px 0 0;color:var(--on-slate)}
   .num.hot .v{color:#fff}
   .num .n{font-size:13.5px;color:var(--on-slate-soft);margin-top:4px}
@@ -236,6 +239,7 @@
     background:var(--caution);color:#23262B;
     padding:12px 18px;border-radius:12px;font-weight:800;
     font-size:16px;text-decoration:none;
+    max-width:100%;overflow-wrap:anywhere;
   }
   .mailto:hover{text-decoration:underline}
   .contact a.plain{color:#FFDF6B}
