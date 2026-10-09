@@ -194,8 +194,7 @@
 
       <h3>Paws &mdash; pavement temperature</h3>
       <p class="fine">
-        Estimated from the National Weather Service forecast, sun angle, cloud cover and surface
-        type (asphalt or concrete), plus the pavement’s own thermal lag.
+        Estimated from your local forecast (the National Weather Service in the United States, MET Norway everywhere else), sun angle, cloud cover and surface type (asphalt or concrete), plus the pavement’s own thermal lag.
       </p>
       <div class="scroll">
       <table>
@@ -310,8 +309,7 @@
     <div class="col">
       <h2 class="sign">Free, and Pro</h2>
       <p>
-        The safety answer is never behind the paywall. Today’s verdict, today’s hour-by-hour
-        timeline, one dog profile and every Learn article are free, forever.
+        The safety answer is never behind the paywall. Today’s verdict, today’s hour-by-hour timeline, one dog profile, the last 7 days of walk and care records and every Learn article are free, forever.
       </p>
       <h3>Free</h3>
       <ul>
@@ -319,6 +317,8 @@
         <li>Today’s hour-by-hour timeline and today’s best walk windows</li>
         <li>Estimated asphalt <em>and</em> concrete temperature</li>
         <li>One dog profile, judged on its own risk factors</li>
+        <li>Walk and care records (walks with the route, meals and more) for the last 7 days &mdash; older records are kept, not deleted</li>
+        <li>An alert before a danger stretch starts</li>
         <li>All of the Learn guides, including the 7-second rule</li>
       </ul>
       <h3>Paw Weather Pro &mdash; monthly, yearly, or one-time</h3>
@@ -326,7 +326,9 @@
         <li><strong>7-Day Walk Planner</strong> &mdash; every safe window for the week ahead</li>
         <li><strong>Smart Alerts</strong> &mdash; a morning summary of the day’s danger hours, and a
           pre-walk check before your usual walk time</li>
+        <li><strong>The whole log</strong> &mdash; every walk and meal beyond the last 7 days, plus the month calendar</li>
         <li><strong>The whole pack</strong> &mdash; profiles for up to 6 dogs</li>
+        <li><strong>Redecorate the room</strong> &mdash; wood, sage, rose or night sky for your buddy’s room</li>
       </ul>
       <p class="fine" style="margin-top:12px">
         Choose monthly (with a free trial for first-time subscribers), yearly, or a one-time purchase,
@@ -345,9 +347,7 @@
 
       <h3>Where does the weather come from?</h3>
       <p>
-        The National Weather Service (api.weather.gov), a free U.S. public service in the public
-        domain. That is also why <strong>coverage is the United States only</strong> right now
-        &mdash; the app has no forecast source outside it.
+        In the United States, from the National Weather Service (api.weather.gov), a free public-domain service. Everywhere else, from MET Norway (api.met.no), licensed CC BY 4.0. So the forecast and the verdict work <strong>outside the United States too</strong>.
       </p>
 
       <h3>I bought Pro and it isn’t showing up</h3>
@@ -366,15 +366,13 @@
 
       <h3>What about cold, ice and road salt?</h3>
       <p>
-        This version judges heat only. On a cold day it says so plainly instead of saying “safe”
-        &mdash; it does not look at ice or de-icing salt, and it won’t pretend otherwise.
+        In cold weather Paw Weather warns about frostbite risk on bare paws, wind chill, ice and road salt conditions, and reminds you to wipe your dog’s paws after the walk. How strict the cold verdict gets depends on your dog’s coat and breed.
       </p>
 
       <h3>Does it collect my data?</h3>
       <p>
         No accounts, no ads, no analytics, no tracking. Dog profiles and settings stay on the phone.
-        If you allow location, the coordinates go only to the National Weather Service to fetch the
-        forecast. Details in the <a href="privacy.html">privacy policy</a>.
+        If you allow location, the coordinates go only to the public weather service for your area &mdash; the National Weather Service in the United States, MET Norway elsewhere &mdash; to fetch the forecast. Details in the <a href="privacy.html">privacy policy</a>.
       </p>
     </div>
   </div>
@@ -437,7 +435,7 @@
         <a href="https://apps.apple.com/us/app/id6798468915" target="_blank" rel="noopener">Paw Weather on the App Store</a>
       </div>
       <p>&copy; 2026 Nobutaka Kawasaki &middot; Paw Weather</p>
-      <p>Weather data: National Weather Service (api.weather.gov), public domain.</p>
+      <p>Weather data: National Weather Service (api.weather.gov), public domain, in the United States; MET Norway (api.met.no), CC BY 4.0, elsewhere.</p>
     </div>
   </div>
 </footer>
@@ -449,42 +447,42 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "How hot is asphalt when the air is 77°F?",
+      "name": "Where does the weather come from?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "On a sunny 77°F day, Paw Weather's model puts asphalt in full sun near 127°F; the published spot measurements the app cites in its Learn article give roughly 125°F. At that surface temperature, skin damage can occur in about 60 seconds of contact, which is why paw burns happen on days that feel pleasant to people. Concrete sidewalks run 14–25°F cooler than asphalt under the same sun."
+        "text": "In the United States, from the National Weather Service (api.weather.gov), a free public-domain service. Everywhere else, from MET Norway (api.met.no), licensed CC BY 4.0. So the forecast and the verdict work outside the United States too."
       }
     },
     {
       "@type": "Question",
-      "name": "What is the 7-second rule for dog walks?",
+      "name": "I bought Pro and it isn’t showing up",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Press the back of your hand flat on the pavement and hold it for seven seconds. If you cannot hold it, the pavement is too hot for your dog's paws. Paw pads burn at the same temperatures human skin does."
+        "text": "Open Settings → Restore purchases. Pro, whether a subscription or a one-time purchase, is tied to the Apple ID that bought it, so restoring works on any device signed in to that Apple ID. If it still doesn’t unlock, email me and I'll help."
       }
     },
     {
       "@type": "Question",
-      "name": "What thresholds does Paw Weather use?",
+      "name": "It keeps suggesting walk times I'd never take",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "For an average adult dog: pavement at 110°F or above is CAUTION and 125°F or above is DANGER; a heat index of 80°F or above is CAUTION and 90°F or above is DANGER. Air temperature of 100°F or above is always DANGER. Flat-faced breeds, puppies, seniors and dark-coated dogs in direct sun get stricter thresholds."
+        "text": "Settings → Walk hours caps the earliest (5–8 AM) and latest (7–11 PM) times Paw Weather will ever suggest. Walk windows and alerts stay inside those hours — set them to your routine and to the streets you trust after dark."
       }
     },
     {
       "@type": "Question",
-      "name": "Where does Paw Weather get its weather data, and which countries does it cover?",
+      "name": "What about cold, ice and road salt?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "From the U.S. National Weather Service API (api.weather.gov), a free public-domain service. Coverage is the United States only."
+        "text": "In cold weather Paw Weather warns about frostbite risk on bare paws, wind chill, ice and road salt conditions, and reminds you to wipe your dog’s paws after the walk. How strict the cold verdict gets depends on your dog’s coat and breed."
       }
     },
     {
       "@type": "Question",
-      "name": "How do I restore a Paw Weather Pro purchase?",
+      "name": "Does it collect my data?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Open Settings and tap Restore purchases. Paw Weather Pro, whether a subscription or a one-time purchase, is tied to your Apple ID, so it restores on any device signed in to the same Apple ID."
+        "text": "No accounts, no ads, no analytics, no tracking. Dog profiles and settings stay on the phone. If you allow location, the coordinates go only to the public weather service for your area — the National Weather Service in the United States, MET Norway elsewhere — to fetch the forecast. Details in the privacy policy."
       }
     }
   ]
