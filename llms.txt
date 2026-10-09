@@ -1,0 +1,34 @@
+# Paw Weather: Dog Walk Tracker
+
+> An iPhone dog walk app: it estimates pavement temperature from your local forecast and gives a GO / CAUTION / DANGER verdict for paw burns and heatstroke, warns about ice, frostbite and road salt in winter, and logs your dog's walks and care.
+
+## What it does
+
+- Estimates asphalt and concrete temperature from the forecast, including heat the pavement stores into the evening
+- Judges two dangers separately — hot pavement (paw pads) and heat (heatstroke risk) — and names which one tripped the verdict
+- Hour-by-hour bar for the day showing safe walk windows
+- Winter warnings: frostbite risk on bare paws, wind chill, road salt conditions
+- Records walks with the route, a care log (meals, potty, weight and more) and care plans with reminders
+- Learn articles, including the 7-second hand test
+- Paw Weather Pro (in-app purchase): 7-day walk planner, smart alerts, more dogs
+- Weather data: U.S. National Weather Service in the United States, MET Norway elsewhere
+- No account; an educational planning tool, not veterinary advice
+
+## Who it's for
+
+- Dog owners who want to know whether it is too hot (or too icy) to walk the dog right now, and when it will be OK
+- Owners of puppies, seniors and heat-sensitive breeds
+
+## App Store
+
+- https://apps.apple.com/us/app/id6798468915
+- 日本: https://apps.apple.com/jp/app/id6798468915
+
+## Pages
+
+- [Home](https://nosunosukawa.github.io/pawweather-site/)
+- [Is it too hot to walk my dog? — web checker](https://nosunosukawa.github.io/pawweather-site/paw-check.html)
+- [When is pavement too hot for dog paws?](https://nosunosukawa.github.io/pawweather-site/hot-pavement.html)
+- [Is a cloudy day safe for dog walks?](https://nosunosukawa.github.io/pawweather-site/cloudy-day-walks.html)
+- [Support & FAQ](https://nosunosukawa.github.io/pawweather-site/support.html)
+- [Privacy Policy](https://nosunosukawa.github.io/pawweather-site/privacy.html)

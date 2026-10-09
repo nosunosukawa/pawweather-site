@@ -3,9 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>PawWeather — Dog Walk Safety App: Pavement Temperature &amp; Heat Risk</title>
-<meta name="description" content="Support for PawWeather, the dog walk safety app. Is the pavement too hot for your dog's paws? Air 77°F can mean asphalt near 127°F — past the temperature where paw pads burn.">
-<meta property="og:title" content="PawWeather — Is it too hot to walk your dog?">
+<meta name="apple-itunes-app" content="app-id=6798468915">
+<title>Paw Weather — Dog Walk App: Hot Pavement Check, Heat Risk &amp; Walk Log (iPhone)</title>
+<meta name="description" content="Paw Weather is an iPhone dog walk app that checks whether the pavement is too hot for your dog's paws, rates heatstroke risk, and logs walks and care. Air 77°F can mean asphalt near 127°F — past the temperature where paw pads burn.">
+<meta property="og:title" content="Paw Weather — Is it too hot to walk your dog?">
 <meta property="og:description" content="Pavement temperature for US dog owners. Air 77°F can mean 127°F asphalt.">
 <meta property="og:image" content="https://nosunosukawa.github.io/pawweather-site/og-image.png">
 <meta property="og:url" content="https://nosunosukawa.github.io/pawweather-site/">
@@ -16,7 +17,7 @@
 <meta name="theme-color" content="#1E2327">
 <style>
   /* ============================================================
-     PawWeather — the page is one Fahrenheit scale.
+     Paw Weather — the page is one Fahrenheit scale.
      Colour means one thing only on this page: a threshold.
      Green / amber / red are the app's own sign colours
      (mobile/pawweather/src/ui/theme.ts). Blue is "something you can do".
@@ -208,6 +209,9 @@
     font-size:17px;text-decoration:none;min-height:48px;
   }
   .cta:hover{text-decoration:underline}
+  .cta.store{margin-right:10px}
+  .faq h3{font-size:18px;margin-top:22px}
+  .faq p{margin-top:6px;max-width:62ch}
   .cta-note{font-size:13px;color:var(--on-slate-2);margin-top:8px}
 
   /* ---------- verdict band ---------- */
@@ -281,6 +285,67 @@
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "da30c37073e746159a379341e417854d"}'></script>
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MobileApplication",
+  "name": "Paw Weather: Dog Walk Tracker",
+  "operatingSystem": "iOS",
+  "applicationCategory": "LifestyleApplication",
+  "description": "Paw Weather is an iPhone dog walk app. It estimates pavement temperature from your forecast and gives a GO / CAUTION / DANGER verdict for paw burns and heatstroke, warns about ice and road salt in winter, and logs walks and your dog's care.",
+  "url": "https://nosunosukawa.github.io/pawweather-site/",
+  "installUrl": "https://apps.apple.com/us/app/id6798468915",
+  "inLanguage": "en"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is there an app that tells me if the pavement is too hot to walk my dog?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Paw Weather estimates asphalt and concrete temperature from your local forecast and gives one verdict before the walk: GO, CAUTION or DANGER. It judges hot pavement (paw burns) and heat (heatstroke risk) separately and tells you which one tripped the verdict."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What time of day is safest to walk my dog in the heat?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Paw Weather shows an hour-by-hour bar for the day in green, amber and red, so you can see the safe walk windows. It carries the pavement's stored heat into the evening instead of assuming sunset is safe. Paw Weather Pro adds a 7-day walk planner and smart alerts."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can an app warn me about icy sidewalks, frostbite and road salt on winter walks?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. In cold weather Paw Weather warns about frostbite risk on bare paws, wind chill and road salt conditions, and reminds you to wipe your dog's paws after the walk."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is there an app to track my dog's walks and care, like meals, potty and weight?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Paw Weather records your walks with the route, keeps a care log for meals, potty, weight and more, and lets you set care plans with reminders, such as vaccines or checkups."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is a pavement temperature estimate enough to decide?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The pavement numbers are estimates. Paw Weather also teaches the 7-second test: hold the back of your hand on the pavement for seven seconds. If you can't, your dog shouldn't walk on it. It is a planning tool, not veterinary advice."
+      }
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -289,7 +354,7 @@
 <div class="band util">
   <div class="inner">
     <nav aria-label="Site">
-      <span class="brand sign" translate="no">PawWeather</span>
+      <span class="brand sign" translate="no">Paw Weather</span>
       <a href="support.html">Support</a>
       <a href="privacy.html">Privacy</a>
     </nav>
@@ -353,6 +418,7 @@
         <p class="lede">Paw pads burn at about 125&deg;F in under a minute.</p>
         <a class="cta sign" href="paw-check.html">Check your street now</a>
         <p class="cta-note">Free &middot; no app needed</p>
+        <a class="cta sign store" href="https://apps.apple.com/us/app/id6798468915" target="_blank" rel="noopener">Download on the App Store</a>
       </div>
 
     </div>
@@ -371,14 +437,14 @@
         <figure class="shot">
           <div class="frame">
             <img src="assets/02-hero-go.png" width="560" height="1217" loading="lazy"
-                 alt="PawWeather in Seattle, Washington: a green GO panel reading cool and comfortable, paws OK and heat OK, air 62 degrees, estimated asphalt 65 degrees, and an hour-by-hour bar for the next 18 hours.">
+                 alt="Paw Weather in Seattle, Washington: a green GO panel reading cool and comfortable, paws OK and heat OK, air 62 degrees, estimated asphalt 65 degrees, and an hour-by-hour bar for the next 18 hours.">
           </div>
           <figcaption><span class="chip" style="background:#0B7A4B"></span>GO &mdash; pavement and heat both check out.</figcaption>
         </figure>
         <figure class="shot">
           <div class="frame">
             <img src="assets/01-hero-danger.png" width="560" height="1217" loading="lazy"
-                 alt="PawWeather in Phoenix, Arizona: a red DANGER panel reading heat index 94 degrees, high heatstroke risk, with paws marked OK and heat marked DANGER, and a red hour-by-hour bar.">
+                 alt="Paw Weather in Phoenix, Arizona: a red DANGER panel reading heat index 94 degrees, high heatstroke risk, with paws marked OK and heat marked DANGER, and a red hour-by-hour bar.">
           </div>
           <figcaption><span class="chip" style="background:#C8202F"></span>DANGER &mdash; and it names which risk tripped it.</figcaption>
         </figure>
@@ -441,7 +507,7 @@
         <!-- ENGINE-DATA-END -->
       </svg>
       <p class="chart-cap">
-        Clear sky, the day’s hottest hour, from PawWeather’s own engine &mdash; stored
+        Clear sky, the day’s hottest hour, from Paw Weather’s own engine &mdash; stored
         heat included, the way the app does. Asphalt hits 125&deg;F on a
         76&deg;F day. Concrete runs 14&ndash;25&deg;F cooler &mdash; often that is the whole answer.
       </p>
@@ -499,9 +565,27 @@
       <figure class="pro-shot">
         <div class="frame">
           <img src="assets/03-week-planner.png" width="560" height="1217" loading="lazy"
-               alt="The PawWeather week tab: a 7-day walk planner headed The week in Seattle, with Thursday’s hour-by-hour green, amber and red bar and the safe windows until 12 PM and after 9 PM, above the card that unlocks the remaining six days.">
+               alt="The Paw Weather week tab: a 7-day walk planner headed The week in Seattle, with Thursday’s hour-by-hour green, amber and red bar and the safe windows until 12 PM and after 9 PM, above the card that unlocks the remaining six days.">
         </div>
       </figure>
+    </div>
+  </div>
+</section>
+
+<section class="band verdict faq" id="faq">
+  <div class="inner">
+    <div class="col">
+      <h2 class="sign">Questions dog owners ask</h2>
+        <h3>Is there an app that tells me if the pavement is too hot to walk my dog?</h3>
+        <p>Paw Weather estimates asphalt and concrete temperature from your local forecast and gives one verdict before the walk: GO, CAUTION or DANGER. It judges hot pavement (paw burns) and heat (heatstroke risk) separately and tells you which one tripped the verdict.</p>
+        <h3>What time of day is safest to walk my dog in the heat?</h3>
+        <p>Paw Weather shows an hour-by-hour bar for the day in green, amber and red, so you can see the safe walk windows. It carries the pavement's stored heat into the evening instead of assuming sunset is safe. Paw Weather Pro adds a 7-day walk planner and smart alerts.</p>
+        <h3>Can an app warn me about icy sidewalks, frostbite and road salt on winter walks?</h3>
+        <p>Yes. In cold weather Paw Weather warns about frostbite risk on bare paws, wind chill and road salt conditions, and reminds you to wipe your dog's paws after the walk.</p>
+        <h3>Is there an app to track my dog's walks and care, like meals, potty and weight?</h3>
+        <p>Paw Weather records your walks with the route, keeps a care log for meals, potty, weight and more, and lets you set care plans with reminders, such as vaccines or checkups.</p>
+        <h3>Is a pavement temperature estimate enough to decide?</h3>
+        <p>No. The pavement numbers are estimates. Paw Weather also teaches the 7-second test: hold the back of your hand on the pavement for seven seconds. If you can't, your dog shouldn't walk on it. It is a planning tool, not veterinary advice.</p>
     </div>
   </div>
 </section>
@@ -512,6 +596,7 @@
   <div class="inner">
     <div class="col">
       <p class="support-line">How the verdict is made, FAQ and the fine print:</p>
+      <a class="cta sign store" href="https://apps.apple.com/us/app/id6798468915" target="_blank" rel="noopener">Download on the App Store</a>
       <a class="cta sign" href="support.html">Support</a>
       <div class="foot-links">
         <a href="mailto:nosunosukawa@gmail.com">nosunosukawa@gmail.com</a>
