@@ -2,463 +2,140 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="apple-itunes-app" content="app-id=6798468915">
 <title>Paw Weather — Dog Walk App: Hot Pavement Check, Heat Risk &amp; Walk Log (iPhone)</title>
-<meta name="description" content="Paw Weather is an iPhone dog walk app that checks whether the pavement is too hot for your dog's paws, rates heatstroke risk, and logs walks and care. Air 77°F can mean asphalt near 127°F — past the temperature where paw pads burn.">
+<meta name="description" content="Paw Weather is an iPhone dog walk app that estimates asphalt and concrete temperature from your forecast and gives a GO / CAUTION / DANGER verdict for paw burns and heatstroke. Winter ice, road salt and frostbite warnings, plus a walk and care log.">
+<link rel="canonical" href="https://nosunosukawa.github.io/pawweather-site/">
+<link rel="alternate" hreflang="en" href="https://nosunosukawa.github.io/pawweather-site/">
+<link rel="alternate" hreflang="ja" href="https://nosunosukawa.github.io/pawweather-site/ja/">
+<link rel="alternate" hreflang="x-default" href="https://nosunosukawa.github.io/pawweather-site/">
 <meta property="og:title" content="Paw Weather — Is it too hot to walk your dog?">
-<meta property="og:description" content="Pavement temperature for dog owners. Air 77°F can mean 127°F asphalt.">
-<meta property="og:image" content="https://nosunosukawa.github.io/pawweather-site/og-image.png">
+<meta property="og:description" content="Air 77°F can mean asphalt near 125°F. One verdict for paw burns and heatstroke, before you clip the leash.">
+<meta property="og:image" content="https://nosunosukawa.github.io/pawweather-site/assets/og-en.png">
 <meta property="og:url" content="https://nosunosukawa.github.io/pawweather-site/">
 <meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="canonical" href="https://nosunosukawa.github.io/pawweather-site/">
 <meta name="color-scheme" content="light dark">
-<meta name="theme-color" content="#1E2327">
-<style>
-  /* ============================================================
-     Paw Weather — the page is one Fahrenheit scale.
-     Colour means one thing only on this page: a threshold.
-     Green / amber / red are the app's own sign colours
-     (mobile/pawweather/src/ui/theme.ts). Blue is "something you can do".
-     ============================================================ */
-  :root{
-    --ground:#D9DDDB;        /* cured concrete, cool grey */
-    --ink:#191C1E;           /* asphalt */
-    --ink-2:#4C5356;
-    --slate:#1E2327;         /* the dark ground of the store shots */
-    --on-slate:#E8ECEA;
-    --on-slate-2:#A7B0B4;
-    --tick:#8C9599;
-
-    --go:#0B7A4B;
-    --caution:#FFC414;
-    --danger:#C8202F;
-    --action:#0F5C93;        /* links on the light ground */
-    --action-fill:#1266A5;   /* buttons */
-
-    /* chart zones: washes, so the data lines stay on top */
-    --zone-go:#BCCFC7;
-    --zone-caution:#E4D69F;
-    --zone-danger:#D5B3B5;
-
-    --rail:34px;
-    --scale-h:360px;
-  }
-  @media (min-width:520px){ :root{ --rail:44px; --scale-h:440px } }
-
-  @media (prefers-color-scheme: dark){
-    :root{
-      --ground:#101315;
-      --ink:#E8ECEA;
-      --ink-2:#9EA7AB;
-      --action:#7CC0EE;
-      --action-fill:#1266A5;
-      --zone-go:#0F2A21;
-      --zone-caution:#403615;
-      --zone-danger:#40161C;
-    }
-  }
-
-  *{box-sizing:border-box;margin:0;padding:0}
-  html{
-    -webkit-text-size-adjust:100%;background:var(--ground);
-    color-scheme:light dark;
-  }
-  body{
-    background:var(--ground);
-    color:var(--ink);
-    touch-action:manipulation;
-    -webkit-tap-highlight-color:rgba(18,102,165,.20);
-    font-family:"Avenir Next",Avenir,"Segoe UI Variable Text","Segoe UI",system-ui,-apple-system,sans-serif;
-    font-size:16px;line-height:1.55;
-    overflow-wrap:break-word;
-  }
-
-  /* ---------- three named faces, three jobs ---------- */
-  .sign{
-    font-family:"Avenir Next Condensed","Avenir Next Condensed Heavy",
-                "HelveticaNeue-CondensedBold","Helvetica Neue","Arial Narrow",system-ui,sans-serif;
-    font-stretch:condensed;
-    font-weight:800;
-    text-transform:uppercase;
-    letter-spacing:.005em;
-    line-height:1;
-  }
-  .num{
-    font-family:Menlo,"SF Mono",ui-monospace,"DejaVu Sans Mono","Roboto Mono",Consolas,monospace;
-    font-variant-numeric:tabular-nums;
-  }
-  .label{
-    font-family:Menlo,"SF Mono",ui-monospace,"DejaVu Sans Mono","Roboto Mono",Consolas,monospace;
-    font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.16em;line-height:1.3;
-  }
-
-  /* ---------- the spine ---------- */
-  .band{position:relative}
-  .inner{
-    position:relative;
-    max-width:1200px;margin-inline:auto;
-    padding:34px 0 34px calc(var(--rail) + env(safe-area-inset-left));
-  }
-  /* The instrument's stem. It runs from the scale in the hero down to the
-     7-second band and stops there with a cap: past that point the app has said
-     everything it can, and your hand decides. */
-  .inner::before{
-    content:"";position:absolute;left:0;top:0;bottom:0;width:11px;
-    background:
-      linear-gradient(currentColor,currentColor) left/1px 100% no-repeat,
-      repeating-linear-gradient(to bottom, currentColor 0 1px, transparent 1px 14px);
-    opacity:.38;
-  }
-  .util .inner::before,.hero .inner::before,
-  .pro .inner::before,.foot .inner::before{display:none}
-  .seven .inner::after{
-    content:"";position:absolute;left:0;bottom:0;width:26px;height:4px;
-    background:currentColor;opacity:.6;
-  }
-  .col{padding:0 max(18px,env(safe-area-inset-right)) 0 18px;max-width:66ch}
-  .col-wide{padding:0 max(18px,env(safe-area-inset-right)) 0 18px}
-
-  h1,h2{margin:0;text-wrap:balance}
-  h1{font-size:clamp(38px,10.5vw,72px);line-height:.94}
-  h2{font-size:clamp(27px,7.2vw,40px);line-height:1;margin-bottom:14px}
-  p{margin:0}
-  p + p{margin-top:12px}
-  .lede{font-size:clamp(18px,4.8vw,20px);line-height:1.45;margin-top:16px}
-  .cap{font-size:16px}
-  .fine{font-size:14px;color:var(--ink-2)}
-  strong{font-weight:600}
-
-  a{color:var(--action);font-weight:600;text-decoration:underline;text-underline-offset:2px}
-  a:hover{text-decoration-thickness:2px}
-
-  .skip{
-    position:absolute;left:-9999px;top:0;
-    background:var(--caution);color:#191C1E;padding:12px 16px;font-weight:700;z-index:9;
-  }
-  .skip:focus{left:0}
-  #main{scroll-margin-top:12px}
-
-  :focus-visible{outline:3px solid var(--action-fill);outline-offset:3px}
-
-  /* ---------- top bar (44px tap targets — keep) ---------- */
-  .util{background:var(--slate);color:var(--on-slate)}
-  .util .inner{padding-top:0;padding-bottom:0}
-  .util nav{
-    display:flex;flex-wrap:wrap;align-items:center;gap:0 16px;padding:0 18px;
-  }
-  .util .brand{font-size:15px;letter-spacing:.14em;margin-right:auto;padding:12px 0;color:var(--on-slate)}
-  .util a{
-    color:#FFC414;font-size:14px;font-weight:700;text-decoration:none;
-    display:inline-block;padding:13px 2px;min-height:44px;line-height:18px;
-    max-width:100%;overflow-wrap:anywhere;
-  }
-  .util a:hover,.util a:focus-visible{text-decoration:underline}
-  .util a:focus-visible{outline-color:var(--caution)}
-
-  /* ---------- hero ---------- */
-  .hero{background:var(--slate);color:var(--on-slate)}
-  .hero .inner{padding-top:26px;padding-bottom:30px;padding-left:0}
-  .hero .inner::before{display:none}
-  .hero-grid{display:grid;gap:22px;grid-template-areas:"head" "scale" "copy"}
-  .hero-head{grid-area:head;padding-left:var(--rail)}
-  .hero-copy{grid-area:copy;padding-left:var(--rail)}
-  .scale{grid-area:scale}
-  .hero .label{color:var(--on-slate-2)}
-  .hero h1{margin-top:8px}
-  .hero .lede{color:var(--on-slate);max-width:30ch}
-
-  /* the scale itself */
-  .scale{position:relative;height:var(--scale-h)}
-  .scale-bar{position:absolute;left:0;top:0;width:var(--rail);height:100%;display:block}
-  .marks{position:absolute;left:0;right:0;top:0;bottom:0;pointer-events:none}
-  .tk{
-    position:absolute;left:calc(var(--rail) + 7px);transform:translateY(-50%);
-    font-size:11px;color:var(--tick);
-  }
-  .rule{
-    position:absolute;left:var(--rail);right:18px;transform:translateY(-50%);
-    border-top:2px solid var(--c);
-  }
-  .rule span{
-    position:absolute;right:0;top:-9px;background:var(--slate);padding-left:8px;
-    font-size:11px;font-weight:700;letter-spacing:.14em;color:var(--c);
-  }
-  .flag{
-    position:absolute;transform:translateY(-50%);
-    --lift:0;
-    left:calc(var(--rail) + 46px);right:18px;
-    display:flex;align-items:baseline;gap:10px;justify-content:flex-end;
-    padding:7px 12px;border-radius:3px;
-  }
-  .flag .k{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
-  .flag .v{font-size:clamp(30px,8vw,42px);font-weight:700;line-height:1}
-  .flag-air{background:#E8ECEA;color:#191C1E}
-  .flag-asphalt{background:#C8202F;color:#fff;transform:translateY(calc(-100% - 6px))}
-  .zone-word{
-    position:absolute;left:calc(var(--rail) + 7px);transform:translateY(-50%);
-    font-size:11px;font-weight:700;letter-spacing:.14em;
-    text-transform:uppercase;color:var(--on-slate-2);
-  }
-
-  .cta{
-    display:inline-block;margin-top:18px;
-    background:var(--action-fill);color:#fff;
-    padding:15px 22px;border-radius:3px;
-    font-size:17px;text-decoration:none;min-height:48px;
-  }
-  .cta:hover{text-decoration:underline}
-  .cta.store{margin-right:10px}
-  .faq h3{font-size:18px;margin-top:22px}
-  .faq p{margin-top:6px;max-width:62ch}
-  .cta-note{font-size:13px;color:var(--on-slate-2);margin-top:8px}
-
-  /* ---------- verdict band ---------- */
-  .verdict{background:var(--ground)}
-  .shots{display:grid;gap:20px;grid-template-columns:1fr 1fr;margin-top:18px}
-  .shot{margin:0}
-  .frame{
-    border:2px solid #14171A;border-radius:20px;padding:5px;background:#14171A;
-    box-shadow:none;
-  }
-  .frame img{display:block;width:100%;height:auto;border-radius:15px}
-  .shot figcaption{margin-top:10px;font-size:15px}
-  .chip{
-    display:inline-block;width:11px;height:11px;border-radius:2px;margin-right:7px;
-    vertical-align:1px;
-  }
-
-  /* ---------- curve band ---------- */
-  .curve{background:var(--ground)}
-  .chart{display:block;width:100%;max-width:560px;height:auto;margin-top:6px}
-  .chart-cap{margin-top:12px;font-size:15px;color:var(--ink-2);max-width:60ch}
-
-  /* ---------- seven-second band ---------- */
-  .seven{background:var(--caution);color:#191C1E}
-  .seven a{color:#3A2C00}
-  .seven .fine{color:#3A2C00}
-  .hand{display:block;width:100%;max-width:380px;height:auto;margin-bottom:16px}
-
-  /* ---------- free / pro band ---------- */
-  .pro{background:#1266A5;color:#fff}
-  .pro a{color:#fff}
-  .pro .cta{background:#fff;color:#0C4E80}
-  .pro-shot{margin:0;max-width:260px}
-  .pro-shot{margin-inline:auto}
-
-  /* ---------- footer ---------- */
-  .foot{background:var(--slate);color:var(--on-slate)}
-  .foot a{color:#FFC414}
-  .foot .inner{padding-top:28px;padding-bottom:34px}
-  .foot p{font-size:14px;color:var(--on-slate-2)}
-  .foot .support-line{font-size:16px;color:var(--on-slate)}
-  .foot .cta{background:var(--caution);color:#191C1E;margin-top:14px}
-  .foot-links{display:flex;flex-wrap:wrap;gap:0 18px;margin-top:18px}
-  .foot-links a{
-    display:inline-block;padding:13px 0;min-height:44px;line-height:18px;
-    font-size:14px;overflow-wrap:anywhere;max-width:100%;
-  }
-
-  /* ---------- wide screens: the spine stays, the column does not centre ---------- */
-  @media (min-width:900px){
-    body{font-size:17px}
-    .inner{padding-top:52px;padding-bottom:52px}
-    .hero .inner{padding-top:40px;padding-bottom:48px}
-    .hero-grid{
-      grid-template-areas:"scale head" "scale copy";
-      grid-template-columns:minmax(0,540px) minmax(0,1fr);
-      column-gap:48px;align-items:start;
-    }
-    .hero-head,.hero-copy{padding-left:0;padding-right:24px}
-    .hero-copy{align-self:start}
-    :root{--scale-h:470px}
-    .split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,420px);gap:44px;align-items:center}
-    .shots{grid-template-columns:1fr 1fr;max-width:520px}
-    .chart{max-width:640px}
-  }
-
-  @media (prefers-reduced-motion: reduce){
-    *{animation:none !important;transition:none !important;scroll-behavior:auto !important}
-  }
-</style>
-<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "da30c37073e746159a379341e417854d"}'></script>
+<meta name="theme-color" content="#F5F0E7">
+<link rel="stylesheet" href="assets/site.css">
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "da30c37073e746159a379341e417854d"}'></script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "MobileApplication",
   "name": "Paw Weather: Dog Walk Tracker",
+  "alternateName": "Paw Weather",
   "operatingSystem": "iOS",
   "applicationCategory": "LifestyleApplication",
-  "description": "Paw Weather is an iPhone dog walk app. It estimates pavement temperature from your forecast and gives a GO / CAUTION / DANGER verdict for paw burns and heatstroke, warns about ice and road salt in winter, and logs walks and your dog's care.",
+  "description": "An iPhone dog walk app. It estimates asphalt and concrete temperature from your local forecast and gives a GO / CAUTION / DANGER verdict for paw burns and heatstroke, warns about ice, road salt and frostbite in winter, and logs walks and your dog's care.",
   "url": "https://nosunosukawa.github.io/pawweather-site/",
   "installUrl": "https://apps.apple.com/us/app/id6798468915",
-  "inLanguage": "en"
+  "sameAs": ["https://apps.apple.com/us/app/id6798468915"],
+  "inLanguage": "en",
+  "screenshot": [
+    "https://nosunosukawa.github.io/pawweather-site/assets/shots/en/01.webp",
+    "https://nosunosukawa.github.io/pawweather-site/assets/shots/en/02.webp",
+    "https://nosunosukawa.github.io/pawweather-site/assets/shots/en/05.webp",
+    "https://nosunosukawa.github.io/pawweather-site/assets/shots/duo/en/02.webp"
+  ],
+  "featureList": [
+    "Asphalt and concrete temperature estimates",
+    "Separate verdicts for paw burns and heatstroke",
+    "Hour-by-hour walk windows for the next 18 hours",
+    "Winter ice, road salt and frostbite warnings",
+    "Walk routes and a care log for meals, water, weight and medicine",
+    "Minute-by-minute rain during a walk (Apple Weather)",
+    "Records carried to a new iPhone with iCloud",
+    "Two-pane layout on the foldable iPhone"
+  ],
+  "author": {"@type": "Person", "name": "Nobutaka Kawasaki", "email": "nosunosukawa@gmail.com"}
 }
 </script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "FAQPage",
+  "inLanguage": "en",
   "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "Is there an app that tells me if the pavement is too hot to walk my dog?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Paw Weather estimates asphalt and concrete temperature from your local forecast and gives one verdict before the walk: GO, CAUTION or DANGER. It judges hot pavement (paw burns) and heat (heatstroke risk) separately and tells you which one tripped the verdict."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What time of day is safest to walk my dog in the heat?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Paw Weather shows an hour-by-hour bar for the day in green, amber and red, so you can see the safe walk windows. It carries the pavement's stored heat into the evening instead of assuming sunset is safe. Paw Weather Pro adds a 7-day walk planner and smart alerts."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Can an app warn me about icy sidewalks, frostbite and road salt on winter walks?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes. In cold weather Paw Weather warns about frostbite risk on bare paws, wind chill and road salt conditions, and reminds you to wipe your dog's paws after the walk."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Is there an app to track my dog's walks and care, like meals, potty and weight?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Paw Weather records your walks with the route, keeps a care log for meals, potty, weight and more, and lets you set care plans with reminders, such as vaccines or checkups."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Is a pavement temperature estimate enough to decide?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "No. The pavement numbers are estimates. Paw Weather also teaches the 7-second test: hold the back of your hand on the pavement for seven seconds. If you can't, your dog shouldn't walk on it. It is a planning tool, not veterinary advice."
-      }
-    }
+    {"@type": "Question", "name": "How hot is too hot for a dog's paws on pavement?",
+     "acceptedAnswer": {"@type": "Answer", "text": "At about 125°F, pavement can injure a dog's paw pads in about 60 seconds of contact. For an average adult dog, Paw Weather says CAUTION from 110°F pavement and DANGER from 125°F. Puppies get thresholds 5°F stricter because their pads are thinner."}},
+    {"@type": "Question", "name": "At what air temperature is asphalt too hot for dogs?",
+     "acceptedAnswer": {"@type": "Answer", "text": "On a clear day, Paw Weather's model puts asphalt at 125°F when the air is about 76°F, at the hottest hour of the day. Published spot measurements put asphalt near 125°F at 77°F air. A concrete sidewalk runs 14–25°F cooler than asphalt in the same sun."}},
+    {"@type": "Question", "name": "What is the 7-second rule for dog walks?",
+     "acceptedAnswer": {"@type": "Answer", "text": "Press the back of your hand on the pavement for seven seconds. If you can't hold it there, it is too hot for your dog's paws. Paw pads burn at about the same temperature as human skin. The app's pavement numbers are estimates, so your hand has the final say."}},
+    {"@type": "Question", "name": "When is it too hot to walk a dog because of heatstroke?",
+     "acceptedAnswer": {"@type": "Answer", "text": "Paw Weather judges heatstroke risk on the heat index, which combines temperature and humidity. For an average adult dog it says CAUTION from a heat index of 80°F and DANGER from 90°F. It is stricter for flat-faced breeds, puppies, seniors and dark coats in direct sun. Air at 100°F or above is DANGER regardless of humidity."}},
+    {"@type": "Question", "name": "Is it safe to walk my dog after sunset in summer?",
+     "acceptedAnswer": {"@type": "Answer", "text": "Not automatically. Asphalt stores heat. Checked against 16 Arizona DOT roadway sensors about 3.7 hours after sunset, the pavement was still 6.8°F above the air on average, and up to 10.1°F. Paw Weather carries that stored heat forward hour by hour when it suggests walk times."}},
+    {"@type": "Question", "name": "What should I watch for on winter dog walks?",
+     "acceptedAnswer": {"@type": "Answer", "text": "On clear, calm nights shaded pavement can freeze while the air is still above freezing. Road salt dries and cracks paw pads and makes dogs sick if they lick it off, so wipe your dog's paws after every walk. Paw Weather warns about ice, road salt conditions and frostbite risk, and adjusts for your dog's size and coat."}},
+    {"@type": "Question", "name": "Does Paw Weather work outside the United States?",
+     "acceptedAnswer": {"@type": "Answer", "text": "Yes. In the United States the forecast comes from the National Weather Service; everywhere else from MET Norway. Minute-by-minute rain during a walk comes from Apple Weather. The app is in English and Japanese and shows °F or °C."}}
   ]
 }
 </script>
 </head>
 <body>
-
 <a class="skip" href="#main">Skip to content</a>
 
-<div class="band util">
-  <div class="inner">
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="./"><img src="assets/icon.png" alt="" width="32" height="32">Paw Weather</a>
     <nav aria-label="Site">
-      <span class="brand sign" translate="no">Paw Weather</span>
+      <a class="wide-only" href="#how">How it works</a>
       <a href="support.html">Support</a>
-      <a href="privacy.html">Privacy</a>
+      <a class="wide-only" href="privacy.html">Privacy</a>
+      <a class="lang" href="ja/" hreflang="ja" lang="ja">日本語</a>
     </nav>
-  </div>
-</div>
-
-<header class="band hero">
-  <div class="inner">
-    <div class="hero-grid">
-
-      <div class="hero-head">
-        <p class="label">Dog walk safety · US and worldwide</p>
-        <h1 class="sign">The air temperature is lying to you.</h1>
-      </div>
-
-      <div class="scale">
-        <svg class="scale-bar" viewBox="0 0 40 110" preserveAspectRatio="none" role="img"
-             aria-label="A Fahrenheit scale from 60 at the bottom to 170 at the top. Green up to 110 degrees, amber from 110 to 125, red above 125.">
-          <rect x="0" y="0" width="40" height="45" fill="#C8202F"></rect>
-          <rect x="0" y="45" width="40" height="15" fill="#FFC414"></rect>
-          <rect x="0" y="60" width="40" height="50" fill="#0B7A4B"></rect>
-          <g fill="#191C1E" opacity=".55">
-            <rect x="24" y="9.85" width="16" height=".3"></rect>
-            <rect x="24" y="19.85" width="16" height=".3"></rect>
-            <rect x="24" y="29.85" width="16" height=".3"></rect>
-            <rect x="24" y="39.85" width="16" height=".3"></rect>
-            <rect x="24" y="49.85" width="16" height=".3"></rect>
-            <rect x="24" y="59.85" width="16" height=".3"></rect>
-            <rect x="24" y="69.85" width="16" height=".3"></rect>
-            <rect x="24" y="79.85" width="16" height=".3"></rect>
-            <rect x="24" y="89.85" width="16" height=".3"></rect>
-            <rect x="24" y="99.85" width="16" height=".3"></rect>
-          </g>
-        </svg>
-
-        <div class="marks">
-          <span class="tk num" style="top:27.27%">140</span>
-          <span class="tk num" style="top:63.64%">100</span>
-          <span class="tk num" style="top:81.82%">80</span>
-          <span class="tk num" style="top:100%">60</span>
-
-          <span class="zone-word" style="top:5%">Danger</span>
-          <span class="zone-word" style="top:47.7%">Caution</span>
-          <span class="zone-word" style="top:69%">Go</span>
-
-          <div class="rule" style="top:40.91%;--c:#EE6672"><span class="num">125&deg;F</span></div>
-          <div class="rule" style="top:54.55%;--c:#FFC414"><span class="num">110&deg;F</span></div>
-
-          <div class="flag flag-asphalt" style="top:39.09%">
-            <span class="k">Asphalt, clear sky</span>
-            <span class="v num">~127&deg;F</span>
-          </div>
-          <div class="flag flag-air" style="top:84.55%">
-            <span class="k">Air</span>
-            <span class="v num">77&deg;F</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="hero-copy">
-        <p class="lede">Paw pads burn at about 125&deg;F in under a minute.</p>
-        <a class="cta sign" href="paw-check.html">Check your street now</a>
-        <p class="cta-note">Free &middot; no app needed</p>
-        <a class="cta sign store" href="https://apps.apple.com/us/app/id6798468915" target="_blank" rel="noopener">Download on the App Store</a>
-      </div>
-
-    </div>
   </div>
 </header>
 
 <main id="main">
 
-<section class="band verdict">
-  <div class="inner">
-    <div class="col">
-      <h2 class="sign">One word, before you clip the leash.</h2>
-    </div>
-    <div class="col-wide">
-      <div class="shots">
-        <figure class="shot">
-          <div class="frame">
-            <img src="assets/02-hero-go.png" width="560" height="1217" loading="lazy"
-                 alt="Paw Weather in Seattle, Washington: a green GO panel reading cool and comfortable, paws OK and heat OK, air 62 degrees, estimated asphalt 65 degrees, and an hour-by-hour bar for the next 18 hours.">
-          </div>
-          <figcaption><span class="chip" style="background:#0B7A4B"></span>GO &mdash; pavement and heat both check out.</figcaption>
-        </figure>
-        <figure class="shot">
-          <div class="frame">
-            <img src="assets/01-hero-danger.png" width="560" height="1217" loading="lazy"
-                 alt="Paw Weather in Phoenix, Arizona: a red DANGER panel reading heat index 94 degrees, high heatstroke risk, with paws marked OK and heat marked DANGER, and a red hour-by-hour bar.">
-          </div>
-          <figcaption><span class="chip" style="background:#C8202F"></span>DANGER &mdash; and it names which risk tripped it.</figcaption>
-        </figure>
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow">Dog walks × weather × pavement heat</p>
+      <h1>The air temperature is lying to you.</h1>
+      <p class="lede">On a 77&deg;F sunny day, asphalt can reach about 125&deg;F &mdash; hot enough to burn paw pads in a minute. Paw Weather estimates the pavement from your forecast and gives you one word before the walk: GO, CAUTION or DANGER.</p>
+      <div class="verdict-chips" aria-label="Three verdicts">
+        <span class="chip go">GO</span><span class="chip caution">CAUTION</span><span class="chip danger">DANGER</span>
       </div>
+      <div class="btns">
+        <a class="btn" href="https://apps.apple.com/us/app/id6798468915" target="_blank" rel="noopener">View on the App Store</a>
+        <a class="btn ghost" href="paw-check.html">Check your street now</a>
+      </div>
+      <p class="fine" style="margin-top:14px">iPhone · English and Japanese · no account</p>
+    </div>
+    <figure class="hero-shot">
+      <div class="phone"><img src="assets/shots/en/01.webp" width="598" height="1300" fetchpriority="high"
+        alt="Paw Weather's Today screen: a red DANGER verdict with Paws: Danger and Heat: Danger, asphalt about 130°F, too hot for paws, and advice to wait for cooler pavement."></div>
+    </figure>
+  </div>
+</section>
+
+<section class="band alt" id="facts">
+  <div class="wrap">
+    <p class="eyebrow">Quick answers</p>
+    <h2>How hot is too hot to walk a dog?</h2>
+    <p class="narrow">Taken from the app’s Learn articles and the thresholds its verdict uses. Figures are for an average adult dog.</p>
+    <div class="facts">
+      <div class="fact danger"><div class="k">Pavement that burns paw pads</div><div class="v">about 125&deg;F</div><p>About 60 seconds of contact injures skin. Paw Weather says DANGER from here and CAUTION from 110&deg;F.</p></div>
+      <div class="fact caution"><div class="k">Asphalt on a clear day</div><div class="v">77&deg;F air &rarr; ~125&deg;F</div><p>Published spot measurements. Concrete runs 14&ndash;25&deg;F cooler &mdash; but still burns in midsummer.</p></div>
+      <div class="fact danger"><div class="k">Heatstroke (heat index)</div><div class="v">80&deg;F caution · 90&deg;F danger</div><p>Heat index combines temperature and humidity. Flat-faced breeds, puppies, seniors and dark coats get stricter limits.</p></div>
+      <div class="fact go"><div class="k">The coolest time to walk</div><div class="v">Early morning</div><p>Pavement cools overnight. After sunset, asphalt was still 6.8&deg;F above the air on average 3.7 hours later.</p></div>
     </div>
   </div>
 </section>
 
-<section class="band curve">
-  <div class="inner">
-    <div class="col">
-      <h2 class="sign">Asphalt runs hotter than the forecast.</h2>
-    </div>
-    <div class="col-wide">
+<section class="band">
+  <div class="wrap">
+    <p class="eyebrow">The curve</p>
+    <h2>Asphalt runs hotter than the forecast.</h2>
       <svg class="chart" viewBox="0 0 420 320" role="img"
            aria-label="Line chart of estimated pavement temperature against air temperature under a clear sky, at the hottest hour of the day. Asphalt rises from about 97 degrees at 60 degrees of air to about 165 degrees at 100 degrees of air, crossing the 110 degree caution line at about 68 degrees of air and the 125 degree danger line at about 76 degrees. The concrete sidewalk line runs 14 to 25 degrees below it throughout.">
         <!-- ENGINE-DATA-START (regenerated from pawrisk.js — do not hand-edit) -->
@@ -511,102 +188,153 @@
         heat included, the way the app does. Asphalt hits 125&deg;F on a
         76&deg;F day. Concrete runs 14&ndash;25&deg;F cooler &mdash; often that is the whole answer.
       </p>
-    </div>
   </div>
 </section>
 
 <section class="band seven">
-  <div class="inner">
-    <div class="col-wide split">
-      <div>
-        <svg class="hand" viewBox="0 0 300 176" role="img"
-             aria-label="Pictogram: a hand held flat against the pavement for seven seconds.">
-          <g fill="#191C1E">
-            <rect x="62" y="66" width="76" height="66" rx="15"></rect>
-            <rect x="66" y="34" width="15" height="40" rx="7.5"></rect>
-            <rect x="85" y="26" width="15" height="48" rx="7.5"></rect>
-            <rect x="104" y="30" width="15" height="44" rx="7.5"></rect>
-            <rect x="123" y="40" width="15" height="34" rx="7.5"></rect>
-            <rect x="40" y="74" width="15" height="42" rx="7.5"
-                  transform="rotate(-38 47.5 95)"></rect>
-            <rect x="8" y="140" width="284" height="9" rx="1"></rect>
-          </g>
-          <g stroke="#191C1E" stroke-width="3" opacity=".45">
-            <path d="M14 170l12-14M42 170l12-14M70 170l12-14M98 170l12-14M126 170l12-14M154 170l12-14M182 170l12-14M210 170l12-14M238 170l12-14M266 170l12-14"></path>
-          </g>
-          <text x="228" y="112" font-family="Menlo,ui-monospace,monospace" font-size="56"
-                font-weight="700" fill="#191C1E" text-anchor="middle">7 s</text>
-          <text x="290" y="133" font-family="Menlo,ui-monospace,monospace" font-size="11"
-                font-weight="700" letter-spacing="2.4" fill="#191C1E" text-anchor="end">PAVEMENT</text>
-        </svg>
-      </div>
-      <div>
-        <h2 class="sign">Seven seconds, back of your hand.</h2>
-        <p class="cap">Can’t hold it? Your dog shouldn’t walk on it.</p>
-        <p class="cap">Pavement numbers are estimates. Your hand is not.</p>
-      </div>
+  <div class="wrap seven-grid">
+    <div class="big" aria-hidden="true">7 s</div>
+    <div class="narrow">
+      <h2>The 7-second rule: back of your hand, seven seconds.</h2>
+      <p>Can’t hold it? Your dog shouldn’t walk on it. Paw pads burn at about the same temperature as human skin.</p>
+      <p>Pavement numbers are estimates &mdash; surface age, colour, wind and shade move the real number by 10&deg;F or more. Your hand has the final say.</p>
     </div>
   </div>
 </section>
 
-<section class="band pro">
-  <div class="inner">
-    <div class="col-wide split">
-      <div>
-        <h2 class="sign">Free forever: today’s verdict.</h2>
-        <p class="cap">
-          Today’s verdict, today’s timeline, one dog, the last 7 days of records and every guide stay free. Pro adds the 7-day planner, smart alerts, the whole log and up to 6 dogs &mdash; choose monthly (with a free
-          trial for first-time subscribers), yearly, or a one-time purchase.
-          Check the app and the App Store for prices.
-        </p>
-        <a class="cta sign" href="paw-check.html">Check your street now</a>
-      </div>
-      <figure class="pro-shot">
-        <div class="frame">
-          <img src="assets/03-week-planner.png" width="560" height="1217" loading="lazy"
-               alt="The Paw Weather week tab: a 7-day walk planner headed The week in Seattle, with Thursday’s hour-by-hour green, amber and red bar and the safe windows until 12 PM and after 9 PM, above the card that unlocks the remaining six days.">
-        </div>
-      </figure>
+<section class="band alt" id="screens">
+  <div class="wrap">
+    <p class="eyebrow">Screens</p>
+    <h2>From the verdict to every walk you take together.</h2>
+    <div class="gallery" tabindex="0" aria-label="App screens (scroll sideways)">
+      <figure><div class="phone"><img src="assets/shots/en/01.webp" width="598" height="1300" loading="lazy" alt="Today screen: a red DANGER verdict, separate paw and heat verdicts, rain, how long the danger lasts, and sunset time."></div>
+        <figcaption><b>One-word verdict</b>Paws and heat are judged separately, and it names which one tripped.</figcaption></figure>
+      <figure><div class="phone"><img src="assets/shots/en/02.webp" width="598" height="1300" loading="lazy" alt="A walk in progress on the map, with paw prints along the route and buttons for pee, poop, photo, stamp, water and note."></div>
+        <figcaption><b>Record the walk</b>Route and time, pee and poop, photos and notes as you go.</figcaption></figure>
+      <figure><div class="phone"><img src="assets/shots/en/03.webp" width="598" height="1300" loading="lazy" alt="Walk summary: the route coloured by verdict on a map, with distance and duration."></div>
+        <figcaption><b>Walk recap</b>See where the route was safe and where it ran hot.</figcaption></figure>
+      <figure><div class="phone"><img src="assets/shots/en/04.webp" width="598" height="1300" loading="lazy" alt="A new medal earned for collecting every stamp."></div>
+        <figcaption><b>Medals</b>Little rewards for streaks and distance.</figcaption></figure>
+      <figure><div class="phone"><img src="assets/shots/en/05.webp" width="598" height="1300" loading="lazy" alt="The dog card with the latest walk, meal, water, weight and medicine records and one-tap care buttons."></div>
+        <figcaption><b>Care log</b>Meals, water, weight, medicine and condition in one tap.</figcaption></figure>
+      <figure><div class="phone"><img src="assets/shots/en/06.webp" width="598" height="1300" loading="lazy" alt="Month calendar with each day's walks and care."></div>
+        <figcaption><b>Calendar</b>A month of walks and care at a glance.</figcaption></figure>
+      <figure><div class="phone"><img src="assets/shots/en/07.webp" width="598" height="1300" loading="lazy" alt="Memories: photos of the dog from walks, grouped by date."></div>
+        <figcaption><b>Memories</b>Walk photos and diary entries, kept by date.</figcaption></figure>
     </div>
+    <p class="swipe-hint">← scroll sideways →</p>
   </div>
 </section>
 
-<section class="band verdict faq" id="faq">
-  <div class="inner">
-    <div class="col">
-      <h2 class="sign">Questions dog owners ask</h2>
-        <h3>Is there an app that tells me if the pavement is too hot to walk my dog?</h3>
-        <p>Paw Weather estimates asphalt and concrete temperature from your local forecast and gives one verdict before the walk: GO, CAUTION or DANGER. It judges hot pavement (paw burns) and heat (heatstroke risk) separately and tells you which one tripped the verdict.</p>
-        <h3>What time of day is safest to walk my dog in the heat?</h3>
-        <p>Paw Weather shows an hour-by-hour bar for the day in green, amber and red, so you can see the safe walk windows. It carries the pavement's stored heat into the evening instead of assuming sunset is safe. Paw Weather Pro adds a 7-day walk planner and smart alerts.</p>
-        <h3>Can an app warn me about icy sidewalks, frostbite and road salt on winter walks?</h3>
-        <p>Yes. In cold weather Paw Weather warns about frostbite risk on bare paws, wind chill and road salt conditions, and reminds you to wipe your dog's paws after the walk.</p>
-        <h3>Is there an app to track my dog's walks and care, like meals, potty and weight?</h3>
-        <p>Paw Weather records your walks with the route, keeps a care log for meals, potty, weight and more, and lets you set care plans with reminders, such as vaccines or checkups.</p>
-        <h3>Is a pavement temperature estimate enough to decide?</h3>
-        <p>No. The pavement numbers are estimates. Paw Weather also teaches the 7-second test: hold the back of your hand on the pavement for seven seconds. If you can't, your dog shouldn't walk on it. It is a planning tool, not veterinary advice.</p>
+<section class="band" id="duo">
+  <div class="wrap">
+    <p class="eyebrow">Foldable iPhone</p>
+    <h2>On iPhone Duo, open it for the details. <span class="badge">From 1.5.4</span></h2>
+    <p class="narrow">Folded, it is the screen you know. Unfolded, the right side stays exactly as the folded screen, and the left fills with detail &mdash; the next 18 hours, rain for the next 60 minutes. During a walk, the sidebar on the hinge widens the map to one big pane.</p>
+    <!-- Duo のスクショは assets/shots/duo/en/01〜05.webp（build-shots.sh が作る。英語版が届くまでは日本語版の画像） -->
+    <div class="duo-grid">
+      <figure class="duo-closed"><div class="duo-frame"><img src="assets/shots/duo/en/01.webp" width="1099" height="1600" loading="lazy" alt="iPhone Duo folded: the Today screen with a DANGER verdict and advice to wait for cooler pavement."></div>
+        <figcaption>Folded &mdash; the familiar single screen</figcaption></figure>
+      <figure><div class="duo-frame"><img src="assets/shots/duo/en/02.webp" width="1600" height="1125" loading="lazy" alt="iPhone Duo unfolded: on the left, the next 18 hours as bars with pavement, feels-like and air temperature for 6 PM; on the right, the same DANGER verdict as the folded screen."></div>
+        <figcaption>Unfolded &mdash; the next 18 hours on the left, the usual screen on the right</figcaption></figure>
+    </div>
+    <div class="duo-more">
+      <figure><div class="duo-frame"><img src="assets/shots/duo/en/03.webp" width="1600" height="1125" loading="lazy" alt="iPhone Duo unfolded during a walk: feels-like, air and wind, rain for the next 60 minutes and the walk log on the left; the map with pee and poop buttons on the right."></div>
+        <figcaption>On a walk &mdash; rain for the next 60 minutes</figcaption></figure>
+      <figure><div class="duo-frame"><img src="assets/shots/duo/en/04.webp" width="1600" height="1125" loading="lazy" alt="iPhone Duo unfolded with the walk map widened across the whole width, pee, poop and end buttons below."></div>
+        <figcaption>The walk map, as one big pane</figcaption></figure>
+      <figure><div class="duo-frame"><img src="assets/shots/duo/en/05.webp" width="1600" height="1125" loading="lazy" alt="iPhone Duo unfolded on Learn: the list of articles on the left and the 7-second rule article on the right."></div>
+        <figcaption>Learn &mdash; articles on the left, the page on the right</figcaption></figure>
+    </div>
+    <p class="fine" style="margin-top:14px">iPhone Duo screens are shown with the Japanese interface.</p>
+  </div>
+</section>
+
+<section class="band alt" id="how">
+  <div class="wrap narrow">
+    <p class="eyebrow">How it works</p>
+    <h2>Two dangers, judged separately.</h2>
+    <p>Hot pavement (paw burns) and heat (heatstroke) are different dangers with different answers. Paw Weather judges each one and shows you the worse of the two, so the reason you see is the reason that matters.</p>
+    <div class="scroll">
+      <table>
+        <caption>Summer thresholds for an average adult dog</caption>
+        <thead><tr><th>What it checks</th><th>Caution</th><th>Danger</th></tr></thead>
+        <tbody>
+          <tr><td>Paws &mdash; estimated pavement</td><td class="n"><span class="tag caution">110&deg;F+</span></td><td class="n"><span class="tag danger">125&deg;F+</span></td></tr>
+          <tr><td>Body &mdash; heat index</td><td class="n"><span class="tag caution">80&deg;F+</span></td><td class="n"><span class="tag danger">90&deg;F+</span></td></tr>
+          <tr><td>Air temperature itself</td><td class="n">&mdash;</td><td class="n"><span class="tag danger">100&deg;F+</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="fine" style="margin-top:12px">Puppies get pavement limits 5&deg;F stricter. Heat limits are stricter for flat-faced breeds (&minus;6&deg;F), puppies and seniors (&minus;4&deg;F) and a dark coat in direct sun (&minus;3&deg;F), 10&deg;F stricter at most.</p>
+    <h3>Winter: ice, road salt and cold</h3>
+    <p>On clear, calm nights shaded pavement freezes before the air does. Feels-like (wind chill) below 32&deg;F is CAUTION and below 15&deg;F is DANGER &mdash; stricter for small, short-coated, young and senior dogs, with more room for double-coated breeds.</p>
+    <h3>Where the weather comes from</h3>
+    <p>The National Weather Service in the United States, MET Norway everywhere else. Rain for the next 60 minutes during a walk comes from Apple Weather. Pavement temperature is an estimate from sun angle, cloud cover and the heat the pavement has stored.</p>
+    <p><a href="support.html">The full fine print is on the support page.</a></p>
+  </div>
+</section>
+
+<section class="band" id="features">
+  <div class="wrap">
+    <p class="eyebrow">Features</p>
+    <h2>What Paw Weather does</h2>
+    <div class="features">
+      <div class="feature"><h3>Pavement and verdict</h3><p>Estimated asphalt and concrete temperature, paws and heat judged separately.</p></div>
+      <div class="feature"><h3>The next 18 hours</h3><p>An hour-by-hour bar showing the good walk windows.</p></div>
+      <div class="feature"><h3>Winter warnings</h3><p>Ice, road salt conditions and frostbite risk &mdash; plus a reminder to wipe paws.</p></div>
+      <div class="feature"><h3>Fitted to your dog</h3><p>Breed, age, coat colour and thickness move the thresholds.</p></div>
+      <div class="feature"><h3>Walk and care log</h3><p>Routes, pee and poop, photos; meals, water, weight, medicine, condition.</p></div>
+      <div class="feature"><h3>Rain by the minute<span class="badge">From 1.5.4</span></h3><p>During a walk only, the next hour’s rain from Apple Weather.</p></div>
+      <div class="feature"><h3>Moves with iCloud<span class="badge">From 1.5.4</span></h3><p>Records and photos follow you to a new iPhone on the same Apple Account.</p></div>
+      <div class="feature"><h3>Learn</h3><p>The 7-second rule, paw burns, heatstroke and winter walks.</p></div>
+    </div>
+    <p class="fine" style="margin-top:16px">The 7-day walk planner, morning alerts and some other features are part of Paw Weather Pro (in-app purchase). See the app and the App Store for details.</p>
+  </div>
+</section>
+
+<section class="band alt" id="faq">
+  <div class="wrap narrow faq">
+    <p class="eyebrow">FAQ</p>
+    <h2>Questions dog owners ask</h2>
+    <details open><summary><h3>How hot is too hot for a dog's paws on pavement?</h3></summary><div><p>At about 125°F, pavement can injure a dog's paw pads in about 60 seconds of contact. For an average adult dog, Paw Weather says CAUTION from 110°F pavement and DANGER from 125°F. Puppies get thresholds 5°F stricter because their pads are thinner.</p></div></details>
+    <details><summary><h3>At what air temperature is asphalt too hot for dogs?</h3></summary><div><p>On a clear day, Paw Weather's model puts asphalt at 125°F when the air is about 76°F, at the hottest hour of the day. Published spot measurements put asphalt near 125°F at 77°F air. A concrete sidewalk runs 14–25°F cooler than asphalt in the same sun.</p></div></details>
+    <details><summary><h3>What is the 7-second rule for dog walks?</h3></summary><div><p>Press the back of your hand on the pavement for seven seconds. If you can't hold it there, it is too hot for your dog's paws. Paw pads burn at about the same temperature as human skin. The app's pavement numbers are estimates, so your hand has the final say.</p></div></details>
+    <details><summary><h3>When is it too hot to walk a dog because of heatstroke?</h3></summary><div><p>Paw Weather judges heatstroke risk on the heat index, which combines temperature and humidity. For an average adult dog it says CAUTION from a heat index of 80°F and DANGER from 90°F. It is stricter for flat-faced breeds, puppies, seniors and dark coats in direct sun. Air at 100°F or above is DANGER regardless of humidity.</p></div></details>
+    <details><summary><h3>Is it safe to walk my dog after sunset in summer?</h3></summary><div><p>Not automatically. Asphalt stores heat. Checked against 16 Arizona DOT roadway sensors about 3.7 hours after sunset, the pavement was still 6.8°F above the air on average, and up to 10.1°F. Paw Weather carries that stored heat forward hour by hour when it suggests walk times.</p></div></details>
+    <details><summary><h3>What should I watch for on winter dog walks?</h3></summary><div><p>On clear, calm nights shaded pavement can freeze while the air is still above freezing. Road salt dries and cracks paw pads and makes dogs sick if they lick it off, so wipe your dog's paws after every walk. Paw Weather warns about ice, road salt conditions and frostbite risk, and adjusts for your dog's size and coat.</p></div></details>
+    <details><summary><h3>Does Paw Weather work outside the United States?</h3></summary><div><p>Yes. In the United States the forecast comes from the National Weather Service; everywhere else from MET Norway. Minute-by-minute rain during a walk comes from Apple Weather. The app is in English and Japanese and shows °F or °C.</p></div></details>
+    <p class="fine" style="margin-top:18px">General safety information, not veterinary advice. If your dog shows signs of a paw burn, heatstroke or frostbite, contact a veterinarian right away.</p>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <p class="eyebrow">Guides</p>
+    <h2>Read first, then walk</h2>
+    <div class="guides">
+      <a href="paw-check.html"><b>Is it too hot to walk my dog?</b><span>Enter the air temperature and sky; get estimated asphalt and concrete temperatures and a verdict, in your browser.</span></a>
+      <a href="hot-pavement.html"><b>When is pavement too hot for dog paws?</b><span>A pavement temperature chart by air temperature, and how long asphalt stays hot after sunset.</span></a>
+      <a href="cloudy-day-walks.html"><b>Is a cloudy day safe for dog walks?</b><span>Full sun, partly cloudy and overcast &mdash; and what the concrete sidewalk buys you.</span></a>
     </div>
   </div>
 </section>
 
 </main>
 
-<footer class="band foot">
-  <div class="inner">
-    <div class="col">
-      <p class="support-line">How the verdict is made, FAQ and the fine print:</p>
-      <a class="cta sign store" href="https://apps.apple.com/us/app/id6798468915" target="_blank" rel="noopener">Download on the App Store</a>
-      <a class="cta sign" href="support.html">Support</a>
-      <div class="foot-links">
-        <a href="mailto:nosunosukawa@gmail.com">nosunosukawa@gmail.com</a>
-        <a href="privacy.html">Privacy</a>
-      </div>
-      <p style="margin-top:16px">Educational planning tool, not veterinary advice.</p>
-      <p>&copy; 2026 Nobutaka Kawasaki</p>
-      <p>Weather data: National Weather Service (US, public domain); MET Norway elsewhere (CC BY 4.0).</p>
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-links">
+      <a href="support.html">Support</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="mailto:nosunosukawa@gmail.com">nosunosukawa@gmail.com</a>
+      <a href="https://apps.apple.com/us/app/id6798468915" target="_blank" rel="noopener">App Store</a>
+      <a href="ja/" hreflang="ja" lang="ja">日本語</a>
     </div>
+    <p>Educational planning tool, not veterinary advice.</p>
+    <p>Weather data: National Weather Service (US, public domain); MET Norway elsewhere (CC BY 4.0); rain by the minute during a walk from Apple Weather (<a href="https://weatherkit.apple.com/legal-attribution.html" target="_blank" rel="noopener">data sources</a>).</p>
+    <p>&copy; 2026 Nobutaka Kawasaki</p>
   </div>
 </footer>
-
 </body>
 </html>

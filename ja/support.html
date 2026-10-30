@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-itunes-app" content="app-id=6798468915">
+<title>Paw Weather サポート — 犬の散歩の判定のしくみ・よくある質問・お問い合わせ</title>
+<meta name="description" content="Paw Weather のサポート。安全・注意・危険の判定のしくみ、路面温度と熱中症のしきい値、犬種と年齢での調整、iCloud での機種変更、iPhone Duo、購入の復元、天気データの出典、お問い合わせ先。">
+<link rel="canonical" href="https://nosunosukawa.github.io/pawweather-site/ja/support.html">
+<link rel="alternate" hreflang="ja" href="https://nosunosukawa.github.io/pawweather-site/ja/support.html">
+<link rel="alternate" hreflang="en" href="https://nosunosukawa.github.io/pawweather-site/support.html">
+<link rel="alternate" hreflang="x-default" href="https://nosunosukawa.github.io/pawweather-site/support.html">
+<meta property="og:title" content="Paw Weather サポート — 判定のしくみ">
+<meta property="og:image" content="https://nosunosukawa.github.io/pawweather-site/assets/og-ja.png">
+<meta property="og:url" content="https://nosunosukawa.github.io/pawweather-site/ja/support.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#F5F0E7">
+<link rel="stylesheet" href="../assets/site.css">
+<link rel="icon" type="image/png" href="../assets/favicon.png">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "da30c37073e746159a379341e417854d"}'></script>
+</head>
+<body>
+<a class="skip" href="#main">本文へ</a>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="./"><img src="../assets/icon.png" alt="" width="32" height="32">Paw Weather</a>
+    <nav aria-label="サイト">
+      <a class="wide-only" href="./">ホーム</a>
+      <a href="support.html" aria-current="page">サポート</a>
+      <a class="wide-only" href="privacy.html">プライバシー</a>
+      <a class="lang" href="../support.html" hreflang="en" lang="en">English</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<div class="wrap narrow page-head">
+  <p class="eyebrow">サポート · Paw Weather</p>
+  <h1>判定のしくみと、そのほかのこと。</h1>
+  <p>このページで分からないことは <a href="mailto:nosunosukawa@gmail.com">nosunosukawa@gmail.com</a> へどうぞ。ひとりで作っているアプリです。すべて読んでいて、返事はたいてい1〜2日です。</p>
+</div>
+
+<div class="wrap narrow doc" style="padding-bottom:56px">
+
+  <h2>2つの危険を、別々に判定する</h2>
+  <p>肉球のやけどと熱中症は、危ない理由も対策も違います。Paw Weather は2つを別々に判定して、悪いほうを出します。だから、出てきた理由がそのまま「気をつけること」になります。</p>
+
+  <h3>肉球 — 路面の温度</h3>
+  <p class="fine">天気予報（日本を含む米国以外はノルウェー気象研究所 MET Norway、米国内は米国気象局）、太陽の高さ、雲の量、路面の種類（アスファルトかコンクリートか）と、路面が溜めた熱から推定します。</p>
+  <div class="scroll">
+  <table>
+    <caption>平均的な成犬の、路面のしきい値</caption>
+    <thead><tr><th>路面</th><th>判定</th><th>意味</th></tr></thead>
+    <tbody>
+      <tr><td class="n">43℃未満</td><td><span class="tag go">安全</span></td><td>—</td></tr>
+      <tr><td class="n">43℃〜</td><td><span class="tag caution">注意</span></td><td>芝生・日陰・短いコースへ</td></tr>
+      <tr><td class="n">52℃〜</td><td><span class="tag danger">危険</span></td><td>約1分で皮膚が傷む</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="fine" style="margin-top:12px">子犬は肉球が薄いので約3℃厳しく判定します。同じ日なたでも、コンクリートの歩道はアスファルトより約8〜14℃低く、アプリは両方の数字を出します。道の反対側へ渡るだけで済むこともあります。</p>
+
+  <h3>体 — 熱中症</h3>
+  <p class="fine">熱指数（気温と湿度から出す体感の温度）で見ます。犬はパンティング（あえぎ呼吸）で体温を下げますが、湿った空気ではそれが効かないからです。</p>
+  <div class="scroll">
+  <table>
+    <caption>平均的な成犬の、熱指数のしきい値</caption>
+    <thead><tr><th>熱指数</th><th>判定</th><th>意味</th></tr></thead>
+    <tbody>
+      <tr><td class="n">27℃未満</td><td><span class="tag go">安全</span></td><td>—</td></tr>
+      <tr><td class="n">27℃〜</td><td><span class="tag caution">注意</span></td><td>短く、ゆっくり</td></tr>
+      <tr><td class="n">32℃〜</td><td><span class="tag danger">危険</span></td><td>熱中症の危険が高い</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="fine" style="margin-top:12px">暑さに弱い犬ほど厳しく判定します。短頭種は約3℃、子犬とシニア犬は約2℃、直射日光の下の黒い毛は約2℃（合わせて最大約6℃）。気温38℃以上は湿度に関係なく「危険」です。</p>
+
+  <h3>寒さ — 凍結・融雪剤・体感温度</h3>
+  <p class="fine">晴れて風のない夜は、空気より先に日陰の路面が凍るので、日陰の路面は別に推定します。平均的な成犬で、体感（風冷指数）が0℃を下回ると「注意」、−9℃を下回ると「危険」。小型犬・短毛・子犬・シニア犬は厳しく、ダブルコートの犬は余裕を持たせて判定します。</p>
+
+  <h2>「日が沈めば安全」とは限らない</h2>
+  <p>アスファルトは熱を溜めます。米国アリゾナ州の道路センサー16か所と照らし合わせたところ、日没から約3.7時間後でも、路面は<strong>気温より平均約4℃（最大約6℃）高い</strong>ままで、16か所すべてで気温より温かいままでした。Paw Weather はこの遅れを1時間ずつ追いかけるので、夕方の「散歩に良い時間」は、気温の予報だけで見るより短めに出ます。</p>
+  <p>路面の温度は丸めて表示しています。推定なので、実際より細かく見せないためです。</p>
+
+  <h2>よくある質問</h2>
+
+  <h3>天気はどこから取っていますか？</h3>
+  <p>日本を含む米国以外では、ノルウェー気象研究所（MET Norway・api.met.no、CC BY 4.0）から取っています。米国内は米国気象局（api.weather.gov）です。バージョン 1.5.4 から、散歩中の「この先60分の雨」は Apple Weather のデータです。</p>
+
+  <h3>新しい iPhone に記録を移すには？</h3>
+  <p>バージョン 1.5.4 から、iCloud にサインインして iCloud Drive がオンなら、Paw Weather は記録と写真の控えをあなたの iCloud Drive に置きます。新しい iPhone で同じ Apple アカウントにサインインして Paw Weather を入れると、記録が引き継がれます。<strong>設定 → 記録をバックアップ</strong> から、自分でファイルに保存することもできます。</p>
+
+  <h3>iPhone Duo ではどう見えますか？</h3>
+  <p>バージョン 1.5.4 から、閉じているときはいつもの画面です。開くと、右は閉じた画面のまま、左に詳しい中身（これから18時間や、散歩中の「この先60分の雨」）が出ます。まなぶでは、左に記事の一覧、右に本文が開きます。散歩中は、柱のサイドバーから地図を大きく1つに広げられます。</p>
+
+  <h3>Pro を買ったのに反映されない</h3>
+  <p><strong>設定 → 購入を復元</strong> を開いてください。Pro は購入した Apple ID にひもづいているので、同じ Apple ID でサインインしている端末なら復元できます。それでも解除されないときは、メールでご連絡ください。</p>
+
+  <h3>行かない時間ばかり勧められる</h3>
+  <p><strong>設定 → 散歩する時間帯</strong> で、勧める時間のいちばん早い時刻（5〜8時）と遅い時刻（19〜23時）を決められます。散歩に良い時間も通知も、その中だけで出します。暮らしのリズムと、暗くなってから歩ける道に合わせてください。</p>
+
+  <h3>寒さ・凍結・融雪剤は？</h3>
+  <p>寒い日は、肉球の凍傷、体感温度、凍結、融雪剤が撒かれる条件を知らせ、散歩のあとに足を拭くよう声をかけます。寒さの判定の厳しさは、犬の毛の厚さと犬種で変わります。</p>
+
+  <h3>データを集めていますか？</h3>
+  <p>アカウント・広告・分析・追跡はありません。犬のプロフィールと設定は端末の中だけ。位置情報を許可すると、予報を取るために、座標をその地域の公的な気象サービス（米国以外は MET Norway、米国内は米国気象局）へだけ送ります。詳しくは<a href="privacy.html">プライバシーポリシー</a>へ。</p>
+
+  <h2>Pro について</h2>
+  <p>安全のための答えは、いつでも見られます。いまの判定、きょうの時間ごとの棒、アスファルトとコンクリートの推定温度、危ない時間の前の通知、「まなぶ」の記事は、いつもそこにあります。Paw Weather Pro（App Store の App 内課金）では、7日先の散歩の計画、朝の通知などのスマート通知、7日より前の記録すべて、6頭までのプロフィール、部屋の模様替えが加わります。内容はアプリと App Store でご確認ください。</p>
+
+  <h2>読みもの（英語）</h2>
+  <div class="guides">
+    <a href="../paw-check.html" hreflang="en"><b>Is it too hot to walk my dog?</b><span>気温と空模様を入れると、路面の推定温度と判定が出る計算機（°F）。</span></a>
+    <a href="../hot-pavement.html" hreflang="en"><b>When is pavement too hot for dog paws?</b><span>気温ごとの路面温度の表、7秒ルール、日没後のアスファルト。</span></a>
+    <a href="../cloudy-day-walks.html" hreflang="en"><b>Is a cloudy day safe for dog walks?</b><span>晴れ・晴れ時々曇り・曇りと、コンクリートの歩道。</span></a>
+  </div>
+
+  <h2>できないこと</h2>
+  <p><strong>路面の温度は推定です。</strong>予報・太陽の高さ・雲の量から計算したもので、あなたの通りで測った値ではありません。舗装の古さ・色・風・日陰で、実際の温度は5℃以上動きます。最後は必ず7秒ルールで確かめてください。</p>
+  <p><strong>Paw Weather は予定を立てるための目安で、獣医師の助言ではありません。</strong>肉球のやけどや熱中症の兆候があれば、すぐに動物病院に連絡してください。</p>
+  <h3>困ったときは</h3>
+  <p>質問、不具合の報告、「うちの通りでは判定がおかしい」など、なんでもどうぞ。</p>
+  <a class="mail" href="mailto:nosunosukawa@gmail.com">nosunosukawa@gmail.com</a>
+</div>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-links">
+      <a href="./">ホーム</a>
+      <a href="privacy.html">プライバシーポリシー</a>
+      <a href="mailto:nosunosukawa@gmail.com">nosunosukawa@gmail.com</a>
+      <a href="https://apps.apple.com/jp/app/id6798468915" target="_blank" rel="noopener">App Store</a>
+      <a href="../support.html" hreflang="en" lang="en">English</a>
+    </div>
+    <p>天気: ノルウェー気象研究所 MET Norway（api.met.no・CC BY 4.0・米国以外）、米国気象局（api.weather.gov・米国）、散歩中の分ごとの雨は Apple Weather（<a href="https://weatherkit.apple.com/legal-attribution.html" target="_blank" rel="noopener">データの出典</a>）。</p>
+    <p>&copy; 2026 Nobutaka Kawasaki &middot; Paw Weather</p>
+  </div>
+</footer>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "inLanguage": "ja",
+  "mainEntity": [
+    {"@type": "Question", "name": "天気はどこから取っていますか？",
+     "acceptedAnswer": {"@type": "Answer", "text": "日本を含む米国以外では、ノルウェー気象研究所（MET Norway・api.met.no、CC BY 4.0）から取っています。米国内は米国気象局（api.weather.gov）です。バージョン 1.5.4 から、散歩中の「この先60分の雨」は Apple Weather のデータです。"}},
+    {"@type": "Question", "name": "新しい iPhone に記録を移すには？",
+     "acceptedAnswer": {"@type": "Answer", "text": "バージョン 1.5.4 から、iCloud にサインインして iCloud Drive がオンなら、Paw Weather は記録と写真の控えをあなたの iCloud Drive に置きます。新しい iPhone で同じ Apple アカウントにサインインして Paw Weather を入れると、記録が引き継がれます。設定 → 記録をバックアップ から、自分でファイルに保存することもできます。"}},
+    {"@type": "Question", "name": "iPhone Duo ではどう見えますか？",
+     "acceptedAnswer": {"@type": "Answer", "text": "バージョン 1.5.4 から、閉じているときはいつもの画面です。開くと、右は閉じた画面のまま、左に詳しい中身（これから18時間や、散歩中の「この先60分の雨」）が出ます。まなぶでは、左に記事の一覧、右に本文が開きます。散歩中は、柱のサイドバーから地図を大きく1つに広げられます。"}},
+    {"@type": "Question", "name": "Pro を買ったのに反映されない",
+     "acceptedAnswer": {"@type": "Answer", "text": "設定 → 購入を復元 を開いてください。Pro は購入した Apple ID にひもづいているので、同じ Apple ID でサインインしている端末なら復元できます。それでも解除されないときは、メールでご連絡ください。"}},
+    {"@type": "Question", "name": "行かない時間ばかり勧められる",
+     "acceptedAnswer": {"@type": "Answer", "text": "設定 → 散歩する時間帯 で、勧める時間のいちばん早い時刻（5〜8時）と遅い時刻（19〜23時）を決められます。散歩に良い時間も通知も、その中だけで出します。暮らしのリズムと、暗くなってから歩ける道に合わせてください。"}},
+    {"@type": "Question", "name": "寒さ・凍結・融雪剤は？",
+     "acceptedAnswer": {"@type": "Answer", "text": "寒い日は、肉球の凍傷、体感温度、凍結、融雪剤が撒かれる条件を知らせ、散歩のあとに足を拭くよう声をかけます。寒さの判定の厳しさは、犬の毛の厚さと犬種で変わります。"}},
+    {"@type": "Question", "name": "データを集めていますか？",
+     "acceptedAnswer": {"@type": "Answer", "text": "アカウント・広告・分析・追跡はありません。犬のプロフィールと設定は端末の中だけ。位置情報を許可すると、予報を取るために、座標をその地域の公的な気象サービス（米国以外は MET Norway、米国内は米国気象局）へだけ送ります。詳しくはプライバシーポリシーへ。"}}
+  ]
+}
+</script>
+</body>
+</html>

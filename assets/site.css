@@ -1,0 +1,211 @@
+/* Paw Weather — site
+   色はアプリ本体（mobile/pawweather/src/ui/theme.ts）と同じ。緑・黄・赤は判定の色にだけ使う。
+   書体の先頭はヒラギノ（-apple-system が先頭だと iOS Safari で日本語が □ になる）。 */
+:root{
+  --concrete:#F5F0E7; --card:#FFFDF9; --ink:#3B342E; --ink-2:#7A7168; --line:#E6DFD3;
+  --go:#6E8F6B; --go-ink:#3F6140; --go-wash:#DCE7D3;
+  --caution:#D6A64E; --caution-ink:#7C5A17; --caution-wash:#F5E6BF;
+  --danger:#C36A55; --danger-ink:#8E3F2E; --danger-wash:#F3D3C8;
+  --action:#C98A52; --action-ink:#8A5524; --action-wash:#F6E9DC;
+  --rain:#6E8FAE;
+  --night:#2E2823; --on-night:#F5F0E7; --on-night-2:#C9BFB2;
+  --radius:22px;
+  --sans:"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic UI",YuGothic,Meiryo,"Noto Sans JP",system-ui,sans-serif;
+  --round:"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic UI",YuGothic,"Noto Sans JP",system-ui,sans-serif;
+  --mono:"Hiragino Sans",Menlo,"SF Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --concrete:#1C1916; --card:#27221E; --ink:#F2ECE3; --ink-2:#B5AA9C; --line:#3A332D;
+    --go-wash:#26331F; --go-ink:#B6D1AE; --caution-wash:#3A2F17; --caution-ink:#EBCB86;
+    --danger-wash:#3D221B; --danger-ink:#F0B3A3; --action-wash:#3A2A1C; --action-ink:#EDB988;
+    --night:#120F0D;
+  }
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;background:var(--concrete);color-scheme:light dark;scroll-padding-top:12px}
+body{
+  background:var(--concrete);color:var(--ink);
+  font-family:var(--sans);font-size:16px;line-height:1.75;
+  overflow-wrap:anywhere;line-break:strict;
+  -webkit-tap-highlight-color:rgba(201,138,82,.2);
+}
+:lang(en) body,body:lang(en){line-height:1.6}
+img{max-width:100%;height:auto;display:block}
+a{color:var(--action-ink);font-weight:600;text-underline-offset:3px}
+:focus-visible{outline:3px solid var(--action);outline-offset:3px;border-radius:6px}
+h1,h2,h3{font-family:var(--round);font-weight:700;line-height:1.3;text-wrap:balance;letter-spacing:.01em}
+h1{font-size:clamp(30px,8vw,52px);line-height:1.22}
+h2{font-size:clamp(24px,5.6vw,34px);margin-bottom:14px}
+h3{font-size:18px;margin:24px 0 6px}
+p + p{margin-top:12px}
+ul{padding-left:1.3em}
+li + li{margin-top:6px}
+.wrap{max-width:1120px;margin-inline:auto;padding-inline:max(16px,env(safe-area-inset-left)) max(16px,env(safe-area-inset-right))}
+.narrow{max-width:760px}
+.band{padding-block:52px}
+.band.alt{background:var(--card)}
+.eyebrow{font-size:13px;font-weight:700;letter-spacing:.08em;color:var(--action-ink);margin-bottom:8px}
+.lede{font-size:clamp(17px,4.4vw,20px);color:var(--ink);margin-top:14px;max-width:34em}
+.fine{font-size:14px;color:var(--ink-2)}
+.skip{position:absolute;left:-9999px;top:0;background:var(--caution);color:#3B342E;padding:12px 16px;font-weight:700;z-index:9}
+.skip:focus{left:0}
+
+/* ---------- 上の帯 ---------- */
+.top{background:var(--concrete);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:4px 12px;min-height:60px}
+.brand{white-space:nowrap;flex:none;display:flex;align-items:center;gap:10px;margin-right:auto;color:var(--ink);text-decoration:none;font-family:var(--round);font-weight:800;font-size:17px;padding:8px 0}
+.brand img{width:32px;height:32px;border-radius:8px}
+.top nav{display:flex;align-items:center;gap:0 12px}
+@media (max-width:519px){
+  .top nav .wide-only{display:none}
+  .brand{font-size:16px;gap:8px} .brand img{width:28px;height:28px}
+  .top nav{gap:0 10px} .top nav a{font-size:13px}
+}
+.top nav a{white-space:nowrap;display:inline-block;padding:12px 2px;min-height:44px;font-size:14px;color:var(--ink);text-decoration:none}
+.top nav a:hover{text-decoration:underline}
+.top nav a[aria-current="page"]{color:var(--action-ink);text-decoration:underline}
+.lang{border:1.5px solid var(--line);border-radius:999px;padding:8px 14px !important;min-height:0 !important;margin-block:4px;line-height:1.4}
+
+/* ---------- ボタン ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  min-height:52px;padding:12px 24px;border-radius:999px;
+  background:var(--action);color:#fff;font-family:var(--round);font-weight:800;font-size:17px;text-decoration:none;
+}
+.btn:hover{background:#B07640}
+.btn.ghost{background:transparent;color:var(--action-ink);border:2px solid var(--action)}
+.btn.ghost:hover{background:var(--action-wash)}
+.btn svg{width:20px;height:20px;flex:none}
+.btns{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
+
+/* ---------- 冒頭 ---------- */
+.hero{padding-block:36px 48px}
+.hero-grid{display:grid;gap:32px;align-items:center}
+.hero-shot{justify-self:center;width:min(300px,78vw)}
+.verdict-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;font-size:14px;font-weight:700}
+.chip::before{content:"";width:9px;height:9px;border-radius:50%;background:currentColor}
+.chip.go{background:var(--go-wash);color:var(--go-ink)}
+.chip.caution{background:var(--caution-wash);color:var(--caution-ink)}
+.chip.danger{background:var(--danger-wash);color:var(--danger-ink)}
+@media (min-width:860px){
+  .hero{padding-block:56px 72px}
+  .hero-grid{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:56px}
+  .hero-shot{width:320px}
+}
+
+/* ---------- 端末の枠 ---------- */
+.phone{
+  background:#1A1714;border-radius:44px;padding:9px;
+  box-shadow:0 1px 0 rgba(255,255,255,.08) inset,0 18px 40px -18px rgba(59,52,46,.45);
+}
+.phone img{border-radius:36px;width:100%;aspect-ratio:598/1300;object-fit:cover;background:var(--card)}
+.duo-frame{background:#1A1714;border-radius:28px;padding:8px;box-shadow:0 18px 40px -20px rgba(59,52,46,.45)}
+.duo-frame img{border-radius:21px;width:100%;background:var(--card)}
+
+/* ---------- 早見（AI が引用しやすい短い答え） ---------- */
+.facts{display:grid;gap:14px;margin-top:20px}
+.fact{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px}
+.band.alt .fact{background:var(--concrete)}
+.fact .k{font-size:14px;color:var(--ink-2);font-weight:600}
+.fact .v{font-family:var(--round);font-weight:800;font-size:clamp(24px,6vw,30px);line-height:1.25;margin-top:4px}
+.fact p{margin-top:6px;font-size:15px}
+.fact.danger .v{color:var(--danger-ink)} .fact.caution .v{color:var(--caution-ink)} .fact.go .v{color:var(--go-ink)}
+@media (min-width:700px){.facts{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (min-width:1000px){.facts.four{grid-template-columns:repeat(4,minmax(0,1fr))}}
+
+/* ---------- スクショの帯（横に送る） ---------- */
+.gallery{
+  display:grid;grid-auto-flow:column;grid-auto-columns:min(240px,64vw);gap:20px;
+  overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;
+  padding:8px 16px 18px;margin-inline:-16px;scrollbar-width:thin;
+}
+.gallery figure{scroll-snap-align:center;margin:0}
+.gallery figcaption{margin-top:12px;font-size:15px;line-height:1.55}
+.gallery figcaption b{display:block;font-family:var(--round);font-size:16px}
+.swipe-hint{font-size:13px;color:var(--ink-2);margin-top:4px}
+@media (min-width:1150px){.gallery{grid-auto-columns:240px}}
+
+/* ---------- iPhone Duo ---------- */
+.duo-grid{display:grid;gap:24px;margin-top:22px}
+.duo-grid figure{margin:0}
+.duo-grid figcaption{margin-top:10px;font-size:15px}
+.duo-closed{max-width:280px}
+@media (min-width:860px){
+  .duo-grid{grid-template-columns:minmax(0,1fr) minmax(0,1.7fr);align-items:end}
+  .duo-closed{max-width:none}
+}
+.duo-more{display:grid;gap:20px;margin-top:24px;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}
+.duo-more figure{margin:0}
+.duo-more figcaption{margin-top:8px;font-size:14px;color:var(--ink-2)}
+.badge{display:inline-block;font-size:12px;font-weight:700;padding:3px 10px;border-radius:999px;background:var(--action-wash);color:var(--action-ink);vertical-align:middle;margin-left:6px}
+
+/* ---------- 機能の一覧 ---------- */
+.features{display:grid;gap:14px;margin-top:20px;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr))}
+.feature{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px}
+.feature h3{margin:0 0 6px;font-size:17px}
+.feature p{font-size:15px}
+
+/* ---------- 表 ---------- */
+.scroll{overflow-x:auto;margin-top:14px}
+table{border-collapse:collapse;width:100%;min-width:300px;font-size:15px;background:var(--card);border-radius:14px;overflow:hidden}
+caption{text-align:left;font-size:14px;color:var(--ink-2);padding-bottom:8px}
+th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:13px;color:var(--ink-2);font-weight:700}
+td.n{white-space:nowrap;font-variant-numeric:tabular-nums;font-weight:700}
+.tag{display:inline-block;font-size:12px;font-weight:800;padding:2px 9px;border-radius:999px;white-space:nowrap}
+.tag.go{background:var(--go-wash);color:var(--go-ink)}
+.tag.caution{background:var(--caution-wash);color:var(--caution-ink)}
+.tag.danger{background:var(--danger-wash);color:var(--danger-ink)}
+
+/* ---------- 7秒ルール ---------- */
+.seven{background:var(--caution-wash)}
+.seven-grid{display:grid;gap:20px;align-items:center}
+.seven .big{font-family:var(--round);font-weight:800;font-size:clamp(64px,20vw,120px);line-height:1;color:var(--caution-ink)}
+@media (min-width:760px){.seven-grid{grid-template-columns:auto 1fr;gap:40px}}
+
+/* ---------- よくある質問 ---------- */
+.faq details{background:var(--card);border:1px solid var(--line);border-radius:18px;margin-top:10px}
+.band.alt .faq details{background:var(--concrete)}
+.faq summary{cursor:pointer;list-style:none;padding:16px 48px 16px 18px;font-family:var(--round);font-weight:800;font-size:17px;line-height:1.5;position:relative;min-height:44px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:18px;top:13px;font-size:24px;color:var(--action-ink);font-family:var(--sans)}
+.faq details[open] summary::after{content:"−"}
+.faq details > div{padding:0 18px 18px}
+.faq h3{margin:0;font:inherit}
+
+/* ---------- 記事・サポート本文 ---------- */
+.doc h2{margin-top:44px}
+.doc h2:first-child{margin-top:0}
+.doc .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px;margin-top:16px}
+.page-head{padding-block:40px 28px}
+.page-head p{margin-top:12px}
+.updated{font-size:14px;color:var(--ink-2);margin-top:6px}
+.mail{display:inline-block;margin-top:12px;background:var(--action);color:#fff;padding:14px 22px;border-radius:999px;text-decoration:none;font-weight:800;min-height:48px;max-width:100%}
+.guides{display:grid;gap:12px;margin-top:16px;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr))}
+.guides a{display:block;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px 18px;text-decoration:none;color:var(--ink)}
+.band.alt .guides a{background:var(--concrete)}
+.guides a b{display:block;font-family:var(--round);color:var(--action-ink);font-size:17px;line-height:1.45}
+.guides a span{display:block;font-size:14px;color:var(--ink-2);margin-top:4px;font-weight:400}
+
+/* ---------- 下の帯 ---------- */
+.foot{background:var(--night);color:var(--on-night);padding-block:40px 48px}
+.foot a{color:#F2C58F}
+.foot p{font-size:14px;color:var(--on-night-2)}
+.foot p + p{margin-top:8px}
+.foot-links{display:flex;flex-wrap:wrap;gap:0 18px;margin-bottom:14px}
+.foot-links a{display:inline-block;padding:12px 0;min-height:44px;font-size:15px}
+
+@media (min-width:900px){ body{font-size:17px} .band{padding-block:72px} }
+@media (prefers-reduced-motion: reduce){ *{scroll-behavior:auto !important;transition:none !important} }
+
+/* ---------- 路面温度のグラフ（index.html・make-curve.mjs が中身を書き換える） ---------- */
+:root{--zone-go:#DCE7D3;--zone-caution:#F5E6BF;--zone-danger:#F3D3C8}
+@media (prefers-color-scheme: dark){:root{--zone-go:#26331F;--zone-caution:#3A2F17;--zone-danger:#3D221B}}
+.chart{display:block;width:100%;max-width:640px;height:auto;margin-top:10px;color:var(--ink)}
+.chart-cap{margin-top:12px;font-size:15px;color:var(--ink-2);max-width:60ch}
+
+/* ---------- プライバシーポリシー（本文は card の並び） ---------- */
+.doc .card h2{margin:0 0 10px;font-size:clamp(20px,5vw,24px)}
+.doc .card p + p,.doc .card ul{margin-top:10px}

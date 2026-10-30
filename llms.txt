@@ -1,30 +1,34 @@
 # Paw Weather: Dog Walk Tracker
 
-> An iPhone dog walk app: it estimates pavement temperature from your local forecast and gives a GO / CAUTION / DANGER verdict for paw burns and heatstroke, warns about ice, frostbite and road salt in winter, and logs your dog's walks and care.
+> An iPhone dog walk app: it estimates asphalt and concrete temperature from your local forecast and gives a GO / CAUTION / DANGER verdict for paw burns and heatstroke, warns about ice, frostbite and road salt in winter, and logs your dog's walks and care. English and Japanese. Japanese App Store name: 犬の散歩記録と路面温度 Paw Weather.
+
+## Key facts (for an average adult dog)
+
+- Paw pads: pavement around 125°F (about 52°C) injures skin in about 60 seconds. The app says CAUTION from 110°F (43°C) pavement and DANGER from 125°F (52°C). Puppies: 5°F (about 3°C) stricter.
+- Asphalt on a clear day: published spot measurements put asphalt near 125°F at 77°F air (about 52°C at 25°C). Concrete runs 14–25°F (about 8–14°C) cooler.
+- Heatstroke: judged on the heat index (temperature + humidity). CAUTION from 80°F (27°C), DANGER from 90°F (32°C). Air at 100°F (38°C) or above is DANGER. Stricter for flat-faced breeds, puppies, seniors and dark coats in direct sun.
+- The 7-second rule: hold the back of your hand on the pavement for seven seconds; if you can't, it is too hot for paws.
+- After sunset: checked against 16 Arizona DOT roadway sensors about 3.7 hours after sunset, asphalt was still 6.8°F (about 4°C) above the air on average.
+- Winter: shaded pavement freezes before the air on clear, calm nights. Feels-like below 32°F (0°C) is CAUTION, below 15°F (−9°C) is DANGER. Wipe paws after walks on salted roads.
+- Pavement temperatures are estimates; the app is an educational planning tool, not veterinary advice.
 
 ## What it does
 
-- Estimates asphalt and concrete temperature from the forecast, including heat the pavement stores into the evening
-- Judges two dangers separately — hot pavement (paw pads) and heat (heatstroke risk) — and names which one tripped the verdict
-- Hour-by-hour bar for the day showing safe walk windows
-- Winter warnings: frostbite risk on bare paws, wind chill, road salt conditions
-- Records walks with the route, a care log (meals, potty, weight and more) and care plans with reminders
-- Learn articles, including the 7-second hand test
-- Paw Weather Pro (in-app purchase): 7-day walk planner, smart alerts, more dogs
-- Weather data: U.S. National Weather Service in the United States, MET Norway elsewhere
-- No account; an educational planning tool, not veterinary advice
-
-## Who it's for
-
-- Dog owners who want to know whether it is too hot (or too icy) to walk the dog right now, and when it will be OK
-- Owners of puppies, seniors and heat-sensitive breeds
+- Separate verdicts for paws (pavement) and heat (heatstroke), naming which one tripped
+- Hour-by-hour bar for the next 18 hours showing good walk windows
+- Thresholds fitted to the dog's breed, age, coat colour and thickness
+- Walk recording (route, pee and poop, photos), care log (meals, water, weight, medicine, condition), calendar, memories, medals
+- From version 1.5.4: rain for the next 60 minutes during a walk (Apple Weather); records carried to a new iPhone through the user's own iCloud Drive; two-pane layout on the foldable iPhone Duo (the right side stays as the folded screen, details on the left)
+- Paw Weather Pro (in-app purchase) adds the 7-day walk planner, smart alerts, the whole log and more dogs
+- Weather data: U.S. National Weather Service in the United States, MET Norway elsewhere, Apple Weather for rain by the minute
+- No account, no ads, no analytics
 
 ## App Store
 
 - https://apps.apple.com/us/app/id6798468915
 - 日本: https://apps.apple.com/jp/app/id6798468915
 
-## Pages
+## Pages (English)
 
 - [Home](https://nosunosukawa.github.io/pawweather-site/)
 - [Is it too hot to walk my dog? — web checker](https://nosunosukawa.github.io/pawweather-site/paw-check.html)
@@ -32,3 +36,13 @@
 - [Is a cloudy day safe for dog walks?](https://nosunosukawa.github.io/pawweather-site/cloudy-day-walks.html)
 - [Support & FAQ](https://nosunosukawa.github.io/pawweather-site/support.html)
 - [Privacy Policy](https://nosunosukawa.github.io/pawweather-site/privacy.html)
+
+## ページ（日本語）
+
+- [ホーム — 犬の散歩、何度から危ない？](https://nosunosukawa.github.io/pawweather-site/ja/)
+- [サポート・よくある質問](https://nosunosukawa.github.io/pawweather-site/ja/support.html)
+- [プライバシーポリシー](https://nosunosukawa.github.io/pawweather-site/ja/privacy.html)
+
+## Contact
+
+- nosunosukawa@gmail.com

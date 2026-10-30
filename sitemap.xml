@@ -1,9 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://nosunosukawa.github.io/pawweather-site/</loc><lastmod>2026-10-10</lastmod></url>
-  <url><loc>https://nosunosukawa.github.io/pawweather-site/cloudy-day-walks.html</loc><lastmod>2026-10-10</lastmod></url>
-  <url><loc>https://nosunosukawa.github.io/pawweather-site/hot-pavement.html</loc><lastmod>2026-10-10</lastmod></url>
-  <url><loc>https://nosunosukawa.github.io/pawweather-site/paw-check.html</loc><lastmod>2026-10-10</lastmod></url>
-  <url><loc>https://nosunosukawa.github.io/pawweather-site/privacy.html</loc><lastmod>2026-10-10</lastmod></url>
-  <url><loc>https://nosunosukawa.github.io/pawweather-site/support.html</loc><lastmod>2026-10-10</lastmod></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url><loc>https://nosunosukawa.github.io/pawweather-site/</loc><lastmod>2026-10-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nosunosukawa.github.io/pawweather-site/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://nosunosukawa.github.io/pawweather-site/ja/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nosunosukawa.github.io/pawweather-site/"/></url>
+  <url><loc>https://nosunosukawa.github.io/pawweather-site/ja/</loc><lastmod>2026-10-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nosunosukawa.github.io/pawweather-site/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://nosunosukawa.github.io/pawweather-site/ja/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nosunosukawa.github.io/pawweather-site/"/></url>
+  <url><loc>https://nosunosukawa.github.io/pawweather-site/support.html</loc><lastmod>2026-10-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nosunosukawa.github.io/pawweather-site/support.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://nosunosukawa.github.io/pawweather-site/ja/support.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nosunosukawa.github.io/pawweather-site/support.html"/></url>
+  <url><loc>https://nosunosukawa.github.io/pawweather-site/ja/support.html</loc><lastmod>2026-10-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nosunosukawa.github.io/pawweather-site/support.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://nosunosukawa.github.io/pawweather-site/ja/support.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nosunosukawa.github.io/pawweather-site/support.html"/></url>
+  <url><loc>https://nosunosukawa.github.io/pawweather-site/privacy.html</loc><lastmod>2026-10-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nosunosukawa.github.io/pawweather-site/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://nosunosukawa.github.io/pawweather-site/ja/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nosunosukawa.github.io/pawweather-site/privacy.html"/></url>
+  <url><loc>https://nosunosukawa.github.io/pawweather-site/ja/privacy.html</loc><lastmod>2026-10-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nosunosukawa.github.io/pawweather-site/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://nosunosukawa.github.io/pawweather-site/ja/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nosunosukawa.github.io/pawweather-site/privacy.html"/></url>
+  <url><loc>https://nosunosukawa.github.io/pawweather-site/paw-check.html</loc><lastmod>2026-10-30</lastmod></url>
+  <url><loc>https://nosunosukawa.github.io/pawweather-site/hot-pavement.html</loc><lastmod>2026-10-30</lastmod></url>
+  <url><loc>https://nosunosukawa.github.io/pawweather-site/cloudy-day-walks.html</loc><lastmod>2026-10-30</lastmod></url>
 </urlset>
